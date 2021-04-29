@@ -1,0 +1,2334 @@
+//зміна шрифту та кольору тексту, що виодится в пустому полі вводу як підказка
+input::-webkit-input-placeholder {
+  color: #666666;
+  font-family: FiraSans-lightItalic, serif;
+}
+//те саме для firefox
+input::-moz-placeholder {
+  color: #666666;
+  font-family: FiraSans-lightItalic, serif;
+}
+
+//додавання шрифтів з файлів
+@font-face {
+  font-family: "DiplomataSC";
+  src: url("../Resources/Fonts/DiplomataSC/DiplomataSC-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Comfortaa-regular";
+  src: url("../Resources/Fonts/Comfortaa/Comfortaa-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Comfortaa-bold";
+  src: url("../Resources/Fonts/Comfortaa/Comfortaa-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSans-regular";
+  src: url("../Resources/Fonts/FiraSans/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSans-medium";
+  src: url("../Resources/Fonts/FiraSans/FiraSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSans-lightItalic";
+  src: url("../Resources/Fonts/FiraSans/FiraSans-LightItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BalsamiqSans-regular";
+  src: url("../Resources/Fonts/Balsamiq Sans/BalsamiqSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BalsamiqSans-bold";
+  src: url("../Resources/Fonts/Balsamiq Sans/BalsamiqSans-Bold.ttf") format("truetype");
+}
+
+//додавання кольорів як змінні(не дуже зручно, коли їх багато, тому пізніше такий підхід не використовувався)
+@menu_first_color: #BBF3A1;
+@menu_second_color: #6F9DAA;
+
+//розміри, для яких прописані медіазапити
+@extra_large: 1200px;
+@large: 992px;
+@medium: 768px;
+@small: 576px;
+
+//загальні налаштування документу: висота, ширина, мінімальна ширина
+//, відсутність можливості горизонатльної прокрутки та виділення тексту
+//для різних браузерів
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-x: hidden;
+  min-width: 432px;
+}
+
+//вибрана позиція відносно себе і блок стає flex, що означає, що елементи
+// можна позиціонувати як горизонтвльно так і вертикально. align-items та
+// justify-content дозволяють позиціонувати flex елементи. Також про всяк
+// випадок встановлена ширина 100%. background дозволяє змінювати фон
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #262E44;
+  width: 100%;
+  //linear gradient дозволяє зробити градієнт первних кольорів, а також втсановити їх співвідношення за допомогою %
+  //border radius дозволяє заокруглити границі блоку
+  .logo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#BBF3A1, #6F9DAA);
+    border-radius: 100%;
+    //для заголовків та текстів зазвичай в загальному блоці визначається шрифт та вирівювання
+    .title {
+      font-family: DiplomataSC, serif;
+      text-align: center;
+    }
+    .subtitle {
+      font-family: DiplomataSC, serif;
+      text-align: center;
+    }
+  }
+  .options {
+    position: relative;
+    flex-direction: row;
+    height: 100%;
+    .menu {
+      //стандартне оформлення кнопок не підходить для сайту, тому були стерті
+      // звичайні рамки і ті, що з'являються при натисканні
+      .button {
+        text-align: center;
+        font-family: Comfortaa, serif;
+        display: none;
+        background: linear-gradient(#BBF3A1, #6F9DAA);
+        border: none
+      }
+      //при переміщенні курсору на кнопку, фон її стає світлішим на 15%
+      .button:hover {
+        background: linear-gradient(lighten(#BBF3A1, 15%), lighten(#6F9DAA, 15%));
+      }
+      .button:focus {
+        outline: none;
+      }
+      //абслоютна позиція дозволяє розмістити елемент незалжено від розміщення інших блоків
+      //background url дозволяє постаити на фон зображення, але без background-size воно не буде відображатися коректно
+      .menu_button  {
+        position: absolute;
+        background: url("../Resources/Images/Icons/MenuIcon.png");
+        background-size: contain;
+        border: none;
+      }
+      .menu_button:focus  {
+        outline: none;
+      }
+    }
+    .features {
+      .area {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        background: #DDDDDD;
+        .search {
+          position: absolute;
+        }
+        .search:focus {
+          outline: none;
+        }
+        .icons {
+          .icon {
+            position: absolute;
+            border: none;
+          }
+          .icon:focus {
+            outline: none;
+          }
+          .icon:hover {
+          }
+          #icon1 {
+            background: url("../Resources/Images/Icons/SearchIcon.png");
+            background-size: contain;
+          }
+          #icon2 {
+            background: url("../Resources/Images/Icons/CartIcon.png");
+            background-size: contain;
+          }
+          #icon3 {
+            background: url("../Resources/Images/Icons/AccountIcon.png");
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+}
+//все, що потрібно для опису розділювача - це вказання кольору
+// та ширини на весь екран
+.header_border {
+  width: 100%;
+  background: white;
+}
+.navigation {
+  width: 80%;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  .navigate_button {
+    border: none;
+    background: white;
+    font-family: FiraSans-regular, serif;
+    color: #666666;
+  }
+  //для видылення свытлих кнопок використовуэться затемнення
+  .navigate_button:hover {
+    background: darken(white, 15%);
+  }
+  .navigate_button:focus {
+    outline: none;
+  }
+}
+.content {
+  //фільтри пошуку
+  .filters {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #262E44;
+    .filters_title {
+      font-family: Comfortaa-bold, serif;
+      color: white;
+      text-align: center;
+    }
+    //загальні характеристики фільтрів, де потрібно вписати значення
+    .filter_values {
+      display: flex;
+      flex-direction: column;
+      .fields {
+        display: flex;
+        flex-direction: column;
+        .filter_param {
+          display: flex;
+          flex-direction: column;
+          .param_title {
+            text-align: center;
+            font-family: FiraSans-medium, serif;
+            color: white;
+          }
+          .range {
+            display: flex;
+            flex-direction: row;
+            .end_bound, .start_bound {
+              display: flex;
+              flex-direction: row;
+              .bound_title {
+                text-align: right;
+                font-family: FiraSans-regular, serif;
+                color: #EEEEEE;
+              }
+              .field {
+                font-family: FiraSans-regular, serif;
+                color: #444444;
+              }
+              .field:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+      //загальна характеристика блоку вибору тем малюнку
+      .themes {
+        .themes_title {
+          text-align: center;
+          font-family: FiraSans-medium, serif;
+          color: white;
+        }
+        .theme_rows {
+          display: flex;
+          flex-direction: column;
+          .theme_row {
+            display: flex;
+            flex-direction: row;
+            .theme {
+              display: flex;
+              flex-direction: row;
+              .theme_checkbox {
+                display: none;
+              }
+              //зміна вигляду чекбоксу
+              input[type=checkbox]+label {
+                background: white;
+                width: 20px;
+                height: 20px;
+              }
+              //зміна картинки чекбоксу, коли він виділений
+              input[type=checkbox]:checked+label {
+                background: url("../Resources/Images/Icons/Checked.png") no-repeat;
+                background-size: cover;
+                width: 20px;
+                height: 20px;
+              }
+              .theme_title {
+                font-family: FiraSans-regular, serif;
+                color: #EEEEEE;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  //загальні характеристики блоку сортування малюнків
+  .sort_settings {
+    display: flex;
+    flex-direction: row;
+    background: #262E44;
+    .sort_setting_title {
+      font-family: FiraSans-medium, serif;
+      color: white;
+    }
+    .sorting_params {
+      display: flex;
+      flex-direction: row;
+
+      .select_icon {
+        position: absolute;
+        background: url("../Resources/Images/Icons/SelectArrow.png") no-repeat;
+        background-size: contain;
+      }
+
+      .sorting_param {
+        border: none;
+        //відключення декорацій випадаючого списку для різних браузерів
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        font-family: FiraSans-regular, serif;
+        color: #444444;
+        background: #EEEEEE;
+      }
+
+      .sorting_param:focus {
+        outline: none;
+      }
+    }
+  }
+  .sort-settings_border {
+    width: 100%;
+    background: white;
+  }
+  //загальні характеристики списку малюнків
+  .pictures_list {
+    background: linear-gradient(#FFFFFF, lighten(#CEEC94, 15%));
+    .pictures_list_title {
+      font-family: BalsamiqSans-bold, serif;
+      color: #262E44;
+      text-align: center;
+    }
+    .pictures {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .pictures_row {
+        display: flex;
+        .pictures_sub_row {
+          display: flex;
+          .picture {
+            display: flex;
+            flex-direction: column;
+            background: #DDDDDD;
+
+            .preview {
+              background-position: center;
+            }
+
+            .picture_title {
+              width: 100%;
+              text-align: center;
+              font-family: FiraSans-regular, serif;
+            }
+
+            .stats {
+              display: flex;
+              flex-direction: row;
+
+              .rate {
+                display: flex;
+                flex-direction: row;
+
+                .number {
+                  font-family: BalsamiqSans-regular, serif;
+                }
+
+                .icon {
+                  background: url("../Resources/Images/Icons/StarIcon.png") no-repeat;
+                  background-size: cover;
+                }
+              }
+
+              .downloads {
+                display: flex;
+                flex-direction: row;
+
+                .number {
+                  font-family: BalsamiqSans-regular, serif;
+                }
+
+                .icon {
+                  background: url("../Resources/Images/Icons/DownloadIcon.png") no-repeat;
+                  background-size: cover;
+                }
+              }
+            }
+
+            .details {
+              display: flex;
+              flex-direction: row;
+
+              .cost {
+                font-family: FiraSans-regular, serif;
+              }
+
+              .details_button {
+                border: none;
+                background: #456D89;
+                font-family: FiraSans-regular, serif;
+                color: #FFFFFF;
+              }
+
+              .details_button:hover {
+                background: lighten(#456D89, 15%);
+              }
+
+              .details_button:focus {
+                outline: none;
+              }
+            }
+          }
+          //прописування шляху для кожного з малюнків
+          #picture1 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+
+          #picture2 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+
+          #picture3 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture4 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture5 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture6 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture7 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture8 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture9 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture10 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture11 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture12 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture13 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture14 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture15 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture16 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture17 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture18 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture19 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+          #picture20 {
+            .preview {
+              background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+              background-size: cover;
+            }
+          }
+        }
+      }
+    }
+    //загальні характеритики переходу по сторінках
+    .catalogue_pages {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      //для посилань використовується вимкнення підкреслення
+      .page_link {
+        padding: 6vw 0 3vw 0;
+        margin-left: 3.5vw;
+        font-size: 2.5vw;
+        text-decoration: none;
+        color: #262E44;
+        font-family: FiraSans-regular, serif;
+      }
+      //підкреслення вмикається при наведенні на посилання
+      .page_link:hover {
+        text-decoration: underline;
+      }
+      //був створений ідентификатор першого блоку для прибирання відступів, щою не мати труднощів з розміщенням flex блоків
+      #first_page_link {
+        margin-left: 0;
+      }
+    }
+  }
+}
+.content_border {
+  width: 100%;
+  background: white;
+}
+//футер той самий, що і на інших сторінках
+.footer {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background: #262E44;
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    .contact {
+      font-family: FiraSans-regular, serif;
+      color: #EEEEEE
+    }
+  }
+  .info {
+    display: flex;
+    .about_us {
+      text-decoration: none;
+      font-family: FiraSans-regular, serif;
+      color: #EEEEEE
+    }
+    .about_us:hover {
+      text-decoration: underline;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      .detail {
+        text-decoration: none;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+      .detail:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .icons {
+    display: flex;
+    .icon {
+      border-radius: 100%;
+    }
+    .icon:focus {
+      outline: none;
+    }
+    #footer_icon1 {
+      background: url("../Resources/Images/Icons/TelegramIcon.png") no-repeat;
+      background-size: cover;
+    }
+    #footer_icon2 {
+      background: url("../Resources/Images/Icons/FacebookIcon.png") no-repeat;
+      background-size: cover;
+    }
+    #footer_icon3 {
+      background: url("../Resources/Images/Icons/InstagramIcon.png") no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+//розміщення елементів для малих екранів (432-575 пікселів)
+@media (max-width: @small - 1px) {
+  //вказана висота. Була вказана також і мінімальна ширина, але потім була перенесена у body
+  //в фіксованих блоках вказана також висота
+  //в текстових блоках обов'язково вказаний розмір шрифту
+  .header {
+    height: 50px;
+    .logo {
+      margin-left: 1%;
+      width: 36px;
+      height: 36px;
+      .title {
+        font-size: 16px;
+      }
+      .subtitle {
+        font-size: 2.2px;
+      }
+    }
+    .options {
+      width: 85%;
+      //властивість float
+      .menu {
+        float:right;
+        margin-right: 1%;
+        margin-top: 10px;
+        .menu_button  {
+          width: 30px;
+          height: 30px;
+        }
+        .menu_button:hover  {
+          border: 0.1px solid white;
+        }
+      }
+      .features {
+        .area {
+          border-radius: 20px;
+          width: 85%;
+          height: 20px;
+          margin-left: 20px;
+          margin-top: 13px;
+          padding: 3px;
+          .search {
+            height: 20px;
+            padding-left: 10px;
+            border-radius: 20px;
+            border: 1px solid black;
+            width: 75%;
+          }
+          .search:focus {
+          }
+          .icons {
+            .icon {
+              height: 20px;
+              width: 20px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.1px solid black;
+            }
+            #icon1 {
+              margin-left: 76%;
+            }
+            #icon2 {
+              margin-left: 84%;
+            }
+            #icon3 {
+              margin-left: 92%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header_border {
+    height: 1.5px;
+  }
+  .navigation {
+    margin-left: 58px;
+    .navigate_button {
+      margin-left: 2px;
+      font-size: 15px;
+      width: 90px;
+      height: 20px;
+    }
+  }
+  //задання розміру шрифту, відступів(іноді padding, іноді margin, так як не завжди є ріниця)
+  .content {
+    .filters {
+      padding: 35px 0 15px 0;
+      .filters_title {
+        font-size: 18px;
+        padding-bottom: 10px;
+      }
+      .filter_values {
+        .fields {
+          flex-direction: column;
+          .filter_param {
+            margin-left: 36px;
+            padding-left: 5%;
+            .param_title {
+              width: 282px;
+              font-size: 18px;
+              padding: 8px 0 8px 0;
+            }
+            .range {
+              .start_bound, .end_bound {
+                .bound_title {
+                  width: 30px;
+                  font-size: 20px;
+                }
+                .field {
+                  margin-left: 8px;
+                  font-size: 20px;
+                  height: 20px;
+                  width: 80px;
+                }
+              }
+              .end_bound {
+                margin-left: 30px;
+              }
+            }
+          }
+        }
+        .themes {
+          .themes_title {
+            padding: 8px 0 8px 0;
+            font-size: 18px;
+          }
+          .theme_rows {
+            margin-left: 36px;
+            padding-left: 5%;
+            .theme_row {
+              .theme {
+                width: 27%;
+                input[type=checkbox]+label {
+                  width: 15px;
+                  height: 15px;
+                }
+                input[type=checkbox]:checked+label {
+                  width: 15px;
+                  height: 15px;
+                }
+                .theme_title {
+                  margin-left: 5px;
+                  font-size: 15px;
+                }
+              }
+            }
+            #theme_row2 {
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
+    .filters_border {
+      height: 1.5px
+    }
+    .sort_settings {
+      padding-top: 10px;
+      //була використана функція calc() через різні одниці вимірювання
+      padding-left: calc(36px + 5%);
+      height: 55px;
+      .sort_setting_title {
+        font-size: 18px;
+      }
+      .sorting_params {
+        flex-direction: column;
+        margin-left: 10px;
+        .select_icon {
+          width: 18px;
+          height: 18px;
+          margin-left: 154px;
+        }
+        #select_icon2 {
+          margin-top: 28px;
+        }
+        .sorting_param {
+          padding-right: 20px;
+          padding-left: 5px;
+          height: 18px;
+          font-size: 16px;
+        }
+        #sorting_param2 {
+          margin-top: 10px;
+        }
+      }
+    }
+    .sort-settings_border {
+      height: 1.5px;
+    }
+  }
+  .pictures_list {
+    .pictures_list_title {
+      padding-top: 2vw;
+      font-size: 6vw;
+    }
+    .pictures {
+      //для цього розміру картинки розташовані в 1 ряд
+      .pictures_row {
+        flex-direction: column;
+        .pictures_sub_row {
+          flex-direction: column;
+          .picture {
+            margin-top: 5vw;
+            width: 60vw;
+            outline: 1px solid black;
+            .preview {
+              width: 60vw;
+              height: 60vw;
+            }
+            .picture_title {
+              margin-top: 2vw;
+              font-size: 4vw;
+              font-family: FiraSans-regular, serif;
+            }
+            .stats {
+              margin-top: 4vw;
+              padding: 0 6vw 0 6vw;
+              width: 50vw;
+              .rate {
+                .number {
+                  font-size: 4.4vw;
+                  line-height: 1.5;
+                }
+                .icon  {
+                  margin-left: 1vw;
+                  height: 6.6vw;
+                  width: 6.6vw;
+                }
+              }
+
+              .downloads {
+                margin-left: auto;
+                .number {
+                  font-size: 4.4vw;
+                  line-height: 1.5;
+                  margin-right: 1vw;
+                }
+
+                .icon {
+                  height: 6.6vw;
+                  width: 6.6vw;
+                }
+              }
+            }
+            .details {
+              display: flex;
+              flex-direction: row;
+              width: 50vw;
+              margin-top: 4.4vw;
+              padding: 0 6vw 1vw 6vw;
+              .cost {
+                font-size: 4.4vw;
+                line-height: 2;
+              }
+              .details_button {
+                font-size: 4.4vw;
+                height: 8.8vw;
+                width: 32vw;
+                margin-left: auto;
+              }
+            }
+          }
+        }
+      }
+      #pictures_row3 {
+        display: none;
+      }
+      #pictures_row4 {
+        display: none;
+      }
+      #pictures_row5 {
+        display: none;
+      }
+    }
+  }
+  .content_border {
+    height: 1.5px;
+  }
+  //футер просто скопійований і не уде відрізнятись від футеру на інших сторінках
+  .footer {
+    padding: 10px 0 30px 0;
+    font-size: 2vw;
+    .contacts {
+      .contact {
+        margin-top: 10px;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+    }
+    .info {
+      margin-left: 16%;
+      flex-direction: column;
+      .about_us {
+        margin-top: 10px;
+      }
+
+      .details {
+        .detail {
+          margin-top: 10px;
+        }
+      }
+    }
+    .icons {
+      margin-left: 16%;
+      flex-direction: column;
+      .icon {
+        height: 4vw;
+        width: 4vw;
+        border: 1px solid white;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+//невеликі екрани(ширина 576-767 пікселів)
+@media (min-width: @small) {
+  .header {
+    min-width: 576px;
+    height: 60px;
+    .logo {
+      margin-left: 1%;
+      width: 45px;
+      height: 45px;
+      .title {
+        font-size: 20px;
+      }
+      .subtitle {
+        font-size: 3px;
+      }
+    }
+    .options {
+      height: 100%;
+      width: 85%;
+      .menu {
+        margin-right: 1%;
+        float:right;
+        .button {
+        }
+        .menu_button  {
+          margin-top: 10px;
+          width: 40px;
+          height: 40px;
+        }
+        .menu_button:hover  {
+          border: 0.2px solid white;
+        }
+        .menu_button:focus  {
+        }
+      }
+      .features {
+        .area {
+          border-radius: 20px;
+          width: 85%;
+          height: 24px;
+          margin-left: 22px;
+          margin-top: 14.5px;
+          padding: 4px;
+          .search {
+            height: 24px;
+            padding-left: 10px;
+            border-radius: 20px;
+            border: 1.2px solid black;
+            width: 75%;
+          }
+          .search:focus {
+          }
+          .icons {
+            .icon {
+              height: 24px;
+              width: 24px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.2px solid black;
+            }
+            #icon1 {
+              margin-left: 77.5%;
+            }
+            #icon2 {
+              margin-left: 85%;
+            }
+            #icon3 {
+              margin-left: 92.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header_border {
+    height: 2px;
+  }
+  .navigation {
+    margin-left: 70px;
+    .navigate_button {
+      margin-left: 3px;
+      font-size: 16px;
+      width: 100px;
+      height: 25px;
+    }
+  }
+  .content {
+    //ні фільтири, ні параметри сорутвання не змінились
+    .filters {
+      padding: 55px 0 25px 0;
+      .filters_title {
+        font-size: 22px;
+        padding-bottom: 10px;
+      }
+      .filter_values {
+        .fields {
+          .filter_param {
+            margin-left: 45px;
+            padding-left: 5%;
+            .param_title {
+              width: 340px;
+              font-size: 20px;
+              padding: 11px 0 11px 0;
+            }
+            .range {
+              .start_bound, .end_bound {
+                .bound_title {
+                  width: 35px;
+                  font-size: 22px;
+                }
+                .field {
+                  margin-left: 12px;
+                  font-size: 20px;
+                  height: 22px;
+                  width: 100px;
+                }
+              }
+              .end_bound {
+                margin-left: 30px;
+              }
+            }
+          }
+        }
+        .themes {
+          .themes_title {
+            padding: 11px 0 11px 0;
+            font-size: 20px;
+          }
+          .theme_rows {
+            margin-left: 45px;
+            padding-left: 5%;
+            .theme_row {
+              .theme {
+                width: 27%;
+                input[type=checkbox]+label {
+                  background: white;
+                  width: 18px;
+                  height: 18px;
+                }
+                input[type=checkbox]:checked+label {
+                  background: url("../Resources/Images/Icons/Checked.png") no-repeat;
+                  background-size: cover;
+                  width: 18px;
+                  height: 18px;
+                }
+                .theme_title {
+                  margin-left: 8px;
+                  font-size: 18px;
+                }
+              }
+            }
+            #theme_row2 {
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
+    .filters_border {
+      height: 2px
+    }
+    .sort_settings {
+      padding-top: 10px;
+      padding-left: calc(45px + 5%);
+      height: 60px;
+      .sort_setting_title {
+        font-size: 20px;
+      }
+      .sorting_params {
+        flex-direction: column;
+        margin-left: 10px;
+        .select_icon {
+          width: 20px;
+          height: 20px;
+          margin-left: 168px;
+        }
+        #select_icon2 {
+          margin-top: 30px;
+        }
+        .sorting_param {
+          padding-right: 20px;
+          padding-left: 5px;
+          height: 20px;
+          font-size: 18px;
+        }
+        #sorting_param2 {
+          margin-top: 10px;
+        }
+      }
+    }
+    .sort-settings_border {
+      height: 2px;
+    }
+    .pictures_list {
+      .pictures_list_title {
+        padding-top: 2vw;
+        font-size: 5vw;
+      }
+
+      //малюнки все ще розташовані в 1 ряд
+      .pictures {
+        .pictures_row {
+          flex-direction: column;
+
+          .pictures_sub_row {
+            flex-direction: column;
+
+            .picture {
+              margin-top: 4vw;
+              width: 50vw;
+              outline: 1px solid black;
+
+              .preview {
+                width: 50vw;
+                height: 50vw;
+              }
+
+              .picture_title {
+                margin-top: 2vw;
+                font-size: 3vw;
+                font-family: FiraSans-regular, serif;
+              }
+
+              .stats {
+                margin-top: 3vw;
+                padding: 0 6vw 0 6vw;
+                width: 42vw;
+
+                .rate {
+                  .number {
+                    font-size: 3.6vw;
+                    line-height: 1.5;
+                  }
+
+                  .icon {
+                    margin-left: 1vw;
+                    height: 5.4vw;
+                    width: 5.4vw;
+                  }
+                }
+
+                .downloads {
+                  margin-left: auto;
+
+                  .number {
+                    font-size: 3.6vw;
+                    line-height: 1.5;
+                    margin-right: 1vw;
+                  }
+
+                  .icon {
+                    height: 5.4vw;
+                    width: 5.4vw;
+                  }
+                }
+              }
+
+              .details {
+                display: flex;
+                flex-direction: row;
+                width: 42vw;
+                margin-top: 2vw;
+                padding: 0 6vw 1vw 6vw;
+
+                .cost {
+                  font-size: 4vw;
+                  line-height: 2;
+                }
+
+                .details_button {
+                  font-size: 3.6vw;
+                  height: 7.2vw;
+                  width: 25vw;
+                  margin-left: auto;
+                }
+              }
+            }
+          }
+        }
+
+        #pictures_row3 {
+          display: none;
+        }
+
+        #pictures_row4 {
+          display: none;
+        }
+
+        #pictures_row5 {
+          display: none;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 2px;
+  }
+  .footer {
+    padding: 12px 0 35px 0;
+    font-size: 2vw;
+    .contacts {
+      .contact {
+        margin-top: 10px;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+    }
+    .info {
+      margin-left: 10%;
+      flex-direction: column;
+      .about_us {
+        margin-top: 10px;
+      }
+
+      .details {
+        .detail {
+          margin-top: 10px;
+        }
+      }
+    }
+    .icons {
+      margin-left: 10%;
+      flex-direction: row;
+      .icon {
+        height: 4vw;
+        width: 4vw;
+        border: 1px solid white;
+        margin-top: 5px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+//середня ширина екрану(768-991 пікселів)
+@media (min-width: @medium) {
+  .header {
+    min-width: 768px;
+    height: 90px;
+    .logo {
+      margin-left: 3%;
+      width: 60px;
+      height: 60px;
+      .title {
+        font-size: 28px;
+      }
+      .subtitle {
+        font-size: 3.5px;
+      }
+    }
+    .options {
+      flex-direction: column;
+      height: 100%;
+      width: 85%;
+      .menu {
+        margin-top: 5px;
+        float: left;
+        margin-right: 0;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: 85%;
+        height: 40px;
+        margin-left: 4%;
+        .button {
+          position: absolute;
+          display: inline-block;
+          font-size: 16px;
+          height: 40px;
+          width: 19.75%;
+        }
+        #menu_button1 {
+          margin-left: 0;
+        }
+        #menu_button2 {
+          margin-left: 20.25%;
+        }
+        #menu_button3 {
+          margin-left: 40.5%;
+        }
+        #menu_button4 {
+          margin-left: 60.75%;
+        }
+        #menu_button5 {
+          margin-left: 81%;
+        }
+        .menu_button  {
+          display: none;
+        }
+        .menu_button:hover  {
+          border: 0.2px solid white;
+        }
+        .menu_button:focus  {
+        }
+      }
+      .features {
+        .area {
+          border-radius: 20px;
+          width: 85%;
+          height: 24px;
+          margin-left: 4%;
+          margin-top: 50px;
+          padding: 4px;
+          .search {
+            font-size: 16px;
+            height: 24px;
+            padding-left: 10px;
+            border-radius: 20px;
+            border: 1.5px solid black;
+            width: 75%;
+          }
+          .search:focus {
+          }
+          .icons {
+            .icon {
+              height: 24px;
+              width: 24px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.2px solid black;
+            }
+            #icon1 {
+              margin-left: 77.5%;
+            }
+            #icon2 {
+              margin-left: 85%;
+            }
+            #icon3 {
+              margin-left: 92.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header_border {
+    height: 3px;
+  }
+  .navigation {
+    margin-left: 60px;
+    padding-left: 6%;
+    .navigate_button {
+      margin-left: 3px;
+      font-size: 18px;
+      width: 120px;
+      height: 30px;
+    }
+  }
+  .content {
+    //поля зі значеннями тепер вміщуються в 1 рядок
+    .filters {
+      padding: 55px 0 25px 0;
+      .filters_title {
+        font-size: 22px;
+        padding-bottom: 10px;
+      }
+      .filter_values {
+        .fields {
+          flex-direction: row;
+          width: 74%;
+          margin-left: 60px;
+          padding-left: 6%;
+          .filter_param {
+            width: 48%;
+            margin-left: 0;
+            padding-left: 0;
+            .param_title {
+              width: 100%;
+              font-size: 20px;
+              padding: 11px 0 11px 0;
+            }
+            .range {
+              width:100%;
+              .start_bound, .end_bound {
+                width:48%;
+                .bound_title {
+                  width: 25%;
+                  font-size: 20px;
+                }
+                .field {
+                  margin-left: 5%;
+                  font-size: 20px;
+                  height: 20px;
+                  width: 65%;
+                }
+              }
+              .end_bound {
+                margin-left: 4%;
+              }
+            }
+          }
+          #filter_param2 {
+            margin-left:10%;
+            padding-left: 0;
+          }
+        }
+        .themes {
+          margin-left: 60px;
+          padding-left: 6%;
+          width: 60%;
+          .themes_title {
+            padding: 11px 0 11px 0;
+            margin-right: 18%;
+            font-size: 20px;
+          }
+          .theme_rows {
+            width: 100%;
+            margin-left: 0;
+            padding-left: 0;
+            .theme_row {
+              width: 100%;
+              .theme {
+                width: 32%;
+                input[type=checkbox]+label {
+                  background: white;
+                  width: 18px;
+                  height: 18px;
+                }
+                input[type=checkbox]:checked+label {
+                  background: url("../Resources/Images/Icons/Checked.png") no-repeat;
+                  background-size: cover;
+                  width: 18px;
+                  height: 18px;
+                }
+                .theme_title {
+                  width: 80%;
+                  margin-left: 5%;
+                  font-size: 18px;
+                }
+              }
+            }
+            #theme_row2 {
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
+    .filters_border {
+      height: 3px
+    }
+    //паоаметри сорутвання тепер також вміщуються в 1 рядок
+    .sort_settings {
+      align-items: center;
+      padding-top: 0;
+      padding-left: calc(60px + 6%);
+      height: 50px;
+      .sort_setting_title {
+        font-size: 20px;
+      }
+      .sorting_params {
+        flex-direction: row;
+        margin-left: 10px;
+        .select_icon {
+          width: 22px;
+          height: 22px;
+          margin-left: 206px;
+          margin-top: 2px;
+        }
+        #select_icon2 {
+          margin-top: 2px;
+          margin-left: 390px;
+        }
+        .sorting_param {
+          margin-top: 2px;
+          margin-left: 20px;
+          padding-right: 22px;
+          padding-left: 5px;
+          height: 22px;
+          font-size: 20px;
+        }
+        #sorting_param2 {
+          margin-top: 2px;
+        }
+      }
+    }
+    .sort-settings_border {
+      height: 3px;
+    }
+    .pictures_list {
+      .pictures_list_title {
+        padding-top: 2vw;
+        font-size: 5vw;
+      }
+
+      //малюнки тепер розміщені в 2 ряди
+      .pictures {
+        .pictures_row {
+          flex-direction: column;
+
+          .pictures_sub_row {
+            flex-direction: row;
+
+            .picture {
+              margin-top: 2vw;
+              width: 36vw;
+              outline: 2px solid black;
+
+              .preview {
+                width: 36vw;
+                height: 36vw;
+              }
+
+              .picture_title {
+                margin-top: 1.5vw;
+                font-size: 2.2vw;
+                font-family: FiraSans-regular, serif;
+              }
+
+              .stats {
+                margin-top: 2vw;
+                padding: 0 3vw 0 3vw;
+                width: 30vw;
+
+                .rate {
+                  .number {
+                    font-size: 2.6vw;
+                    line-height: 1.5;
+                  }
+
+                  .icon {
+                    margin-left: 1vw;
+                    height: 3.9vw;
+                    width: 3.9vw;
+                  }
+                }
+
+                .downloads {
+                  margin-left: auto;
+
+                  .number {
+                    font-size: 2.6vw;
+                    line-height: 1.5;
+                    margin-right: 1vw;
+                  }
+
+                  .icon {
+                    height: 3.9vw;
+                    width: 3.9vw;
+                  }
+                }
+              }
+
+              .details {
+                display: flex;
+                flex-direction: row;
+                width: 30vw;
+                margin-top: 1.5vw;
+                padding: 0 3vw 1vw 3vw;
+
+                .cost {
+                  font-size: 2.4vw;
+                  line-height: 2;
+                }
+
+                .details_button {
+                  font-size: 2.4vw;
+                  height: 4.8vw;
+                  width: 16vw;
+                  margin-left: auto;
+                }
+              }
+            }
+            .last {
+              margin-left: 2vw;
+            }
+          }
+        }
+
+        #pictures_row3 {
+          display: flex;
+        }
+
+        #pictures_row4 {
+          display: none;
+        }
+
+        #pictures_row5 {
+          display: none;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 3px;
+  }
+  .footer {
+    padding: 15px 0 42px 0;
+  }
+}
+
+//велика ширина екрану(992-1199 пікселів)
+@media (min-width: @large) {
+  .header {
+    min-width: 992px;
+    height: 100px;
+
+    .logo {
+      float: left;
+      margin-right: 3%;
+      width: 70px;
+      height: 70px;
+
+      .title {
+        font-size: 30px;
+      }
+
+      .subtitle {
+        font-size: 4px;
+      }
+    }
+
+    .options {
+      .menu {
+        margin-left: 2%;
+        margin-top: 10px;
+
+        .button {
+          position: absolute;
+          display: inline-block;
+          width: 19%;
+          height: 36px;
+          font-size: 22px;
+        }
+
+        #menu_button1 {
+          margin-left: 0;
+        }
+
+        #menu_button2 {
+          margin-left: 19.5%;
+        }
+
+        #menu_button3 {
+          margin-left: 39%;
+        }
+
+        #menu_button4 {
+          margin-left: 58.5%;
+        }
+
+        #menu_button5 {
+          margin-left: 78%;
+        }
+      }
+
+      .features {
+        .area {
+          width: 82%;
+          margin-left: 2%;
+          margin-top: 58px;
+          height: 28px;
+
+          .search {
+            height: 28px;
+            padding-left: 2%;
+            border-radius: 20px;
+            border: 1.7px solid black;
+            width: 78%;
+            font-size: 20px;
+          }
+
+          .icons {
+            .icon {
+              height: 28px;
+              width: 28px;
+            }
+
+            .icon:focus {
+            }
+
+            .icon:hover {
+              border: 0.25px solid black;
+            }
+
+            #icon1 {
+              margin-left: 80%;
+            }
+
+            #icon2 {
+              margin-left: 86.5%;
+            }
+
+            #icon3 {
+              margin-left: 93%;
+            }
+          }
+        }
+      }
+    }
+  }
+      .header_border {
+        height: 4px;
+      }
+
+      .navigation {
+        margin-left: 70px;
+        padding-left: 7.5%;
+
+        .navigate_button {
+          margin-left: 3px;
+          font-size: 20px;
+          width: 140px;
+          height: 35px;
+        }
+      }
+
+      .content {
+        .filters {
+          padding: 65px 0 30px 0;
+
+          .filters_title {
+            font-size: 25px;
+            padding-bottom: 10px;
+          }
+
+          .filter_values {
+            .fields {
+              flex-direction: row;
+              width: 70%;
+              margin-left: 70px;
+              padding-left: 8%;
+
+              .filter_param {
+                width: 48%;
+
+                .param_title {
+                  width: 100%;
+                  font-size: 22px;
+                  padding: 13px 0 13px 0;
+                }
+
+                .range {
+                  width: 100%;
+
+                  .start_bound, .end_bound {
+                    width: 48%;
+
+                    .bound_title {
+                      width: 25%;
+                      font-size: 22px;
+                    }
+
+                    .field {
+                      margin-left: 5%;
+                      font-size: 22px;
+                      height: 22px;
+                      width: 65%;
+                    }
+                  }
+
+                  .end_bound {
+                    margin-left: 4%;
+                  }
+                }
+              }
+
+              #filter_param2 {
+                margin-left: 10%;
+                padding-left: 0;
+              }
+            }
+
+            //теми тепер вміщуються в 1 рядок, хоча можливо це не найзручніший варіант
+            .themes {
+              margin-left: 70px;
+              padding-left: 8%;
+              width: 70%;
+
+              .themes_title {
+                padding: 13px 0 13px 0;
+                margin-right: 0;
+                font-size: 22px;
+              }
+
+              .theme_rows {
+                width: 100%;
+                flex-direction: row;
+
+                .theme_row {
+                  width: 50%;
+
+                  .theme {
+                    width: 33%;
+
+                    input[type=checkbox] + label {
+                      width: 16px;
+                      height: 16px;
+                    }
+
+                    input[type=checkbox]:checked + label {
+                      width: 16px;
+                      height: 16px;
+                    }
+
+                    .theme_title {
+                      width: 80%;
+                      margin-left: 5%;
+                      font-size: 16px;
+                    }
+                  }
+                }
+
+                #theme_row2 {
+                  margin-top: 0;
+                }
+              }
+            }
+          }
+        }
+        .filters_border {
+          height: 4px
+        }
+        .sort_settings {
+          align-items: center;
+          padding-left: calc(70px + 8%);
+          height: 60px;
+          padding-top: 0;
+          .sort_setting_title {
+            font-size: 22px;
+          }
+          .sorting_params {
+            flex-direction: row;
+            margin-left: 10px;
+            .select_icon {
+              width: 24px;
+              height: 24px;
+              margin-left: 230px;
+              margin-top: 0;
+            }
+            #select_icon2 {
+              margin-top: 0;
+              margin-left: 434px;
+            }
+            .sorting_param {
+              margin-top: 0;
+              margin-left: 25px;
+              padding-right: 24px;
+              padding-left: 5px;
+              height: 24px;
+              font-size: 22px;
+            }
+            #sorting_param2 {
+              margin-top: 0;
+            }
+          }
+        }
+        .sort-settings_border {
+          height: 4px;
+        }
+        .pictures_list {
+          .pictures_list_title {
+            font-size: 4vw;
+          }
+        }
+      }
+      .content_border {
+        height: 4px;
+      }
+      .footer {
+        padding: 19px 0 52px 0;
+        font-size: 1.5vw;
+
+        .contacts {
+          .contact {
+            margin-top: 10px;
+            font-family: FiraSans-regular, serif;
+            color: #EEEEEE
+          }
+        }
+
+        .info {
+          width: 35%;
+          margin-left: 9%;
+          flex-direction: row;
+
+          .about_us {
+            margin-top: 10px;
+          }
+
+          .details {
+            margin-left: auto;
+
+            .detail {
+              margin-top: 10px;
+            }
+          }
+        }
+
+        .icons {
+          margin-left: 9%;
+          flex-direction: row;
+
+          .icon {
+            height: 3vw;
+            width: 3vw;
+            border: 1px solid white;
+            margin-top: 5px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+
+//найбільша ширина (1200+ пікслелів)
+@media (min-width: @extra_large) {
+  .header {
+    min-width: 1200px;
+    height: 125px;
+
+    .logo {
+      margin-left: 1%;
+      margin-right: 3%;
+      width: 85px;
+      height: 85px;
+
+      .title {
+        font-size: 36px;
+      }
+
+      .subtitle {
+        font-size: 5px;
+      }
+    }
+
+    .options {
+      .menu {
+        margin-left: 4%;
+        margin-top: 14px;
+
+        .button {
+          position: absolute;
+          display: inline-block;
+          width: 19%;
+          height: 48px;
+          font-size: 25px;
+        }
+
+        #menu_button1 {
+          margin-left: 0;
+        }
+
+        #menu_button2 {
+          margin-left: 19.5%;
+        }
+
+        #menu_button3 {
+          margin-left: 39%;
+        }
+
+        #menu_button4 {
+          margin-left: 58.5%;
+        }
+
+        #menu_button5 {
+          margin-left: 78%;
+        }
+
+        .button:hover {
+          background: linear-gradient(lighten(#BBF3A1, 15%), lighten(#6F9DAA, 15%));
+        }
+
+        .button:focus {
+
+        }
+
+        .menu_button {
+          display: none;
+        }
+      }
+
+      .features {
+        width: 100%;
+
+        .area {
+          width: 82%;
+          margin-left: 4%;
+          margin-top: 70px;
+          height: 40px;
+
+          .search {
+            height: 40px;
+            padding-left: 2%;
+            border-radius: 20px;
+            border: 2px solid black;
+            width: 78%;
+            font-size: 24px;
+          }
+
+          .icons {
+            .icon {
+              height: 40px;
+              width: 40px;
+            }
+
+            .icon:focus {
+            }
+
+            .icon:hover {
+              border: 0.2px solid black;
+            }
+
+            #icon1 {
+              margin-left: 80%;
+            }
+
+            #icon2 {
+              margin-left: 86%;
+            }
+
+            #icon3 {
+              margin-left: 92%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header_border {
+    height: 5px;
+  }
+  .navigation {
+    margin-left: 85px;
+    padding-left: 7.5%;
+    .navigate_button {
+      margin-left: 3px;
+      font-size: 22px;
+      width: 160px;
+      height: 40px;
+    }
+  }
+  .content {
+    .filters {
+      padding: 80px 0 35px 0;
+      .filters_title {
+        font-size: 30px;
+        padding-bottom: 10px;
+      }
+      .filter_values {
+        .fields {
+          flex-direction: row;
+          width: 70%;
+          margin-left: 85px;
+          padding-left: 8%;
+          .filter_param {
+            width: 48%;
+            .param_title {
+              width: 100%;
+              font-size: 25px;
+              padding: 13px 0 13px 0;
+            }
+            .range {
+              width:100%;
+              .start_bound, .end_bound {
+                width:48%;
+                .bound_title {
+                  width: 25%;
+                  font-size: 25px;
+                }
+                .field {
+                  margin-left: 5%;
+                  font-size: 25px;
+                  height: 25px;
+                  width: 65%;
+                }
+              }
+              .end_bound {
+                margin-left: 4%;
+              }
+            }
+          }
+          #filter_param2 {
+            margin-left:10%;
+            padding-left: 0;
+          }
+        }
+        .themes {
+          margin-left: 85px;
+          padding-left: 8%;
+          width: 70%;
+          .themes_title {
+            padding: 13px 0 13px 0;
+            margin-right: 0;
+            font-size: 25px;
+          }
+          .theme_rows {
+            width: 100%;
+            flex-direction: row;
+            .theme_row {
+              width: 50%;
+              .theme {
+                width: 33%;
+                input[type=checkbox]+label {
+                  width: 18px;
+                  height: 18px;
+                }
+                input[type=checkbox]:checked+label {
+                  width: 18px;
+                  height: 18px;
+                }
+                .theme_title {
+                  width: 80%;
+                  margin-left: 5%;
+                  font-size: 18px;
+                }
+              }
+            }
+            #theme_row2 {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+    .filters_border {
+      height: 5px
+    }
+    .sort_settings {
+      align-items: center;
+      padding-left: calc(85px + 8%);
+      height: 75px;
+      padding-top: 0;
+      .sort_setting_title {
+        font-size: 25px;
+      }
+      .sorting_params {
+        flex-direction: row;
+        margin-left: 10px;
+        .select_icon {
+          width: 27px;
+          height: 27px;
+          margin-left: 261px;
+          margin-top: 0;
+        }
+        #select_icon2 {
+          margin-top: 0;
+          margin-left: 495px;
+        }
+        .sorting_param {
+          margin-top: 0;
+          margin-left: 30px;
+          padding-right: 27px;
+          padding-left: 5px;
+          height: 27px;
+          font-size: 25px;
+        }
+        #sorting_param2 {
+          margin-top: 0;
+        }
+      }
+    }
+    .sort-settings_border {
+      height: 5px;
+    }
+    .pictures_list {
+      .pictures_list_title {
+        padding-top: 2vw;
+        font-size: 5vw;
+      }
+
+      //картинки тепер розміщуються в 4 рядки і всі вміщуються в 1 сторінці(до цього деякі були приховані)
+      .pictures {
+        .pictures_row {
+          flex-direction: row;
+
+          .pictures_sub_row {
+            flex-direction: row;
+
+            .picture {
+              margin-top: 2vw;
+              width: 17.5vw;
+              outline: 2px solid black;
+
+              .preview {
+                width: 17.5vw;
+                height: 17.5vw;
+              }
+
+              .picture_title {
+                margin-top: 0.8vw;
+                font-size: 1.2vw;
+                font-family: FiraSans-regular, serif;
+              }
+
+              .stats {
+                margin-top: 1vw;
+                padding: 0 1.5vw 0 1.5vw;
+                width: 14.5vw;
+
+                .rate {
+                  .number {
+                    font-size: 1.4vw;
+                    line-height: 1.5;
+                  }
+
+                  .icon {
+                    margin-left: 0.5vw;
+                    height: 2.1vw;
+                    width: 2.1vw;
+                  }
+                }
+
+                .downloads {
+                  margin-left: auto;
+
+                  .number {
+                    font-size: 1.4vw;
+                    line-height: 1.5;
+                    margin-right: 0.5vw;
+                  }
+
+                  .icon {
+                    height: 2.1vw;
+                    width: 2.1vw;
+                  }
+                }
+              }
+
+              .details {
+                display: flex;
+                flex-direction: row;
+                width: 14.5vw;
+                margin-top: 0.75vw;
+                padding: 0 1.5vw 1vw 1.5vw;
+
+                .cost {
+                  font-size: 1.2vw;
+                  line-height: 2;
+                }
+
+                .details_button {
+                  font-size: 1.2vw;
+                  height: 2.4vw;
+                  width: 8vw;
+                  margin-left: auto;
+                }
+              }
+            }
+            .last {
+              margin-left: 2vw;
+            }
+          }
+          .last {
+            margin-left: 2vw;
+          }
+        }
+
+        #pictures_row3 {
+          display: flex;
+        }
+
+        #pictures_row4 {
+          display: flex;
+        }
+
+        #pictures_row5 {
+          display: flex;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 5px;
+  }
+  .footer {
+    padding: 24px 0 70px 0;
+  }
+}

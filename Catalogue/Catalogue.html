@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ua">
+<!-- те саме, що і в лендінгу, але посилання на інші файли -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Каталог</title>
+    <link rel = "stylesheet" href = "Catalogue.css">
+    <script src="Catalogue.js"></script>
+</head>
+<body>
+    <!-- хедер той самий(там є помилки, але виправляти доведеться всюди) -->
+    <div class="header">
+        <div class="logo">
+            <div class="title">U</div>
+            <div class="subtitle">unipictures</div>
+        </div>
+        <div class="options">
+            <div class="menu">
+                <input class="button" id="menu_button1" type="button" value="Категорії">
+                <input class="button" id="menu_button2" type="button" value="Відгуки">
+                <input class="button" id="menu_button3" type="button" value="Оплата">
+                <input class="button" id="menu_button4" type="button" value="Акції">
+                <input class="button" id="menu_button5" type="button" value="FAQ">
+                <input class="menu_button" type="button">
+            </div>
+            <div class="features">
+                <div class="area">
+                    <input class="search" type="search" placeholder="Пошук">
+                    <div class="icons">
+                        <input class="icon" id="icon1" type="button">
+                        <input class="icon" id="icon2" type="button">
+                        <input class="icon" id="icon3" type="button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- розділювач -->
+    <div class="header_border"></div>
+    <!-- меню навігації по сайту, де друга кнопка не має переходу, бо це і є поточна сторінка -->
+    <div class="navigation">
+        <input class="navigate_button" onclick="goToLanding()" type="button" value="Головна >">
+        <input class="navigate_button" type="button" value="Каталог">
+    </div>
+    <div class="content">
+        <!-- фільтри пошуку в каталозі -->
+        <div class="filters">
+            <!-- назва -->
+            <div class="filters_title">Фільтри пошуку</div>
+            <div class="filter_values">
+                <!-- числові параметри з двома полями вводу (мінімум та максимум) -->
+                <div class="fields">
+                    <div class="filter_param" id="filter_param1">
+                        <div class="param_title">Ціна</div>
+                        <div class="range">
+                            <div class="start_bound">
+                                <div class="bound_title">Від</div>
+                                <input class="field" type="text" value="0$">
+                            </div>
+                            <div class="end_bound">
+                                <div class="bound_title">До</div>
+                                <input class="field" type="text" value="1000$">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter_param" id="filter_param2">
+                        <div class="param_title">Оцінка</div>
+                        <div class="range">
+                            <div class="start_bound">
+                                <div class="bound_title">Від</div>
+                                <input class="field" type="text" value="1.0">
+                            </div>
+                            <div class="end_bound">
+                                <div class="bound_title">До</div>
+                                <input class="field" type="text" value="5.0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- теми малюнків (чекбокси) з label для модливості редагування їх зовнішнього вигляду -->
+                <div class="themes">
+                    <div class="themes_title">Тематика</div>
+                    <div class="theme_rows">
+                        <div class="theme_row">
+                            <div class="theme" id="theme_row1">
+                                <input class="theme_checkbox" id="theme_checkbox1" type="checkbox">
+                                <label class="checker" for="theme_checkbox1"></label>
+                                <div class="theme_title">Всі</div>
+                            </div>
+                            <div class="theme">
+                                <input class="theme_checkbox" id="theme_checkbox2" type="checkbox">
+                                <label class="checker" for="theme_checkbox2"></label>
+                                <div class="theme_title">Фентезі</div>
+                            </div>
+                            <div class="theme">
+                                <input class="theme_checkbox" id="theme_checkbox3" type="checkbox">
+                                <label class="checker" for="theme_checkbox3"></label>
+                                <div class="theme_title">Абстракція</div>
+                            </div>
+                        </div>
+                        <div class="theme_row" id="theme_row2">
+                            <div class="theme">
+                                <input class="theme_checkbox" id="theme_checkbox4" type="checkbox">
+                                <label class="checker" for="theme_checkbox4"></label>
+                                <div class="theme_title">Пейзаж</div>
+                            </div>
+                            <div class="theme">
+                                <input class="theme_checkbox" id="theme_checkbox5" type="checkbox">
+                                <label class="checker" for="theme_checkbox5"></label>
+                                <div class="theme_title">Портрет</div>
+                            </div>
+                            <div class="theme">
+                                <input class="theme_checkbox" id="theme_checkbox6" type="checkbox">
+                                <label class="checker" for="theme_checkbox6"></label>
+                                <div class="theme_title">Фантастика</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- розділювач -->
+        <div class="filters_border"></div>
+        <!-- способи сортування з випадаючими списками, декоріції яких головним чином побудовані
+         з інших блоків -->
+        <div class="sort_settings">
+            <div class="sort_setting_title">Сортувати по</div>
+            <div class="sorting_params">
+                <div class="select_icon" id="select_icon1"></div>
+                <select class="sorting_param" id="sorting_param1">
+                    <option>Дата завантаження</option>
+                    <option>Ціна</option>
+                    <option>Популярність</option>
+                    <option>Оцінка</option>
+                </select>
+                <div class="select_icon" id="select_icon2"></div>
+                <select class="sorting_param" id="sorting_param2">
+                    <option>За зростанням</option>
+                    <option>За спаданням</option>
+                </select>
+            </div>
+        </div>
+        <!-- ще одни розідлювач -->
+        <div class="sort-settings_border"></div>
+        <!-- список малюнків, де для роширення гнучкості розміщення використана ієрархія
+         ряд-підряд-малюнок. Декотрі картини помічені додатковим класом last для зручного
+          додавання відступів між ними. Кожен малюнок має свій ідентифікатор для можливості
+           присвоєння унікального малюнку. У кожного малючнку є свої дані. Кнопка "деталі"
+            виконує перехід на нову сторінку -->
+        <div class="pictures_list">
+            <div class="pictures_list_title">Каталог</div>
+            <div class="pictures">
+                <div class="pictures_row" id="pictures_row1">
+                    <div class="pictures_sub_row" id="pictures_sub_row1">
+                        <div class="picture" id="picture1">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture  last" id="picture2">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pictures_sub_row last" id="pictures_sub_row2">
+                        <div class="picture" id="picture3">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture4">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pictures_row" id="pictures_row2">
+                    <div class="pictures_sub_row" id="pictures_sub_row3">
+                        <div class="picture" id="picture5">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture6">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pictures_sub_row last" id="pictures_sub_row4">
+                        <div class="picture" id="picture7">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture8">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pictures_row" id="pictures_row3">
+                    <div class="pictures_sub_row" id="pictures_sub_row5">
+                        <div class="picture" id="picture9">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture10">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pictures_sub_row last" id="pictures_sub_row6">
+                        <div class="picture" id="picture11">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture12">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pictures_row" id="pictures_row4">
+                    <div class="pictures_sub_row" id="pictures_sub_row7">
+                        <div class="picture" id="picture13">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture14">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pictures_sub_row last" id="pictures_sub_row8">
+                        <div class="picture" id="picture15">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture16">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pictures_row" id="pictures_row5">
+                    <div class="pictures_sub_row" id="pictures_sub_row9">
+                        <div class="picture" id="picture17">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture18">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pictures_sub_row last" id="pictures_sub_row10">
+                        <div class="picture" id="picture19">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                        <div class="picture last" id="picture20">
+                            <div class="preview"></div>
+                            <div class="picture_title">Дівчина в загадковому світі</div>
+                            <div class="stats">
+                                <div class="rate">
+                                    <div class="number">4.6</div>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="downloads">
+                                    <div class="number">56</div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="cost">4.99$</div>
+                                <input class="details_button" type="button" value="Детальніше" onclick="goToInfo()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- перехід по сторінкам(перша, попередня, сторінки, які знаходяться поряд з поточною, наступна та остання) -->
+            <div class="catalogue_pages">
+                <a class="page_link" id="first_page_link" href="">Перша</a>
+                <a class="page_link" id="previous_page_link" href="">Попередня</a>
+                <a class="page_link" id="page1_link" href="">1</a>
+                <a class="page_link" id="page2_link" href="">2</a>
+                <a class="page_link" id="page3_link" href="">3</a>
+                <a class="page_link" id="page4_link" href="">4</a>
+                <a class="page_link" id="page5_link" href="">5</a>
+                <a class="page_link" id="next_page_link" href="">Наступна</a>
+                <a class="page_link" id="last_page_link" href="">Остання</a>
+            </div>
+        </div>
+    </div>
+    <!-- розділювач перед футером -->
+    <div class="content_border"></div>
+    <!-- футер такий самий як і в лендінгу -->
+    <div class="footer">
+        <div class="contacts">
+            <div class="contact">Контакти</div>
+            <div class="contact">(065) 324-56-47</div>
+            <div class="contact">(037) 274-84-26</div>
+        </div>
+        <div class="info">
+            <a class="about_us" href="">Про нас</a>
+            <div class="details">
+                <a class="detail" href="">Умови використання</a>
+                <a class="detail" href="">Політика конфіденційності</a>
+            </div>
+        </div>
+        <div class="icons">
+            <input class="icon" id="footer_icon1" type="button">
+            <input class="icon" id="footer_icon2" type="button">
+            <input class="icon" id="footer_icon3" type="button">
+        </div>
+    </div>
+</body>
+</html>

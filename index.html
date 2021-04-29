@@ -1,0 +1,203 @@
+<!-- version 1.000 -->
+<!-- обираємо тип мови. Якщо прописати просто html, то буде html 5 -->
+<!DOCTYPE html>
+<!-- мова сайту за замовчуванням - українська-->
+<html lang="uk">
+<head>
+    <!-- кодування - UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- визначаємо розмір ширину наповнення сайту по ширині екрану -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- назва сайту, що буде відображуватися на вкладці у браузері -->
+    <title>Unipictures</title>
+    <!-- підключення стилів -->
+    <link rel = "stylesheet" href = "Landing/Landing.css">
+    <!-- підключення javascript длф обробки кнопок -->
+    <script src="Landing/landing.js"></script>
+</head>
+<body>
+    <!-- Ієрархія хедеру сайту. Спочатку були сумніви щодо доцільності одних тільки div(в прикладах з інтернету нерідко використовували тег <span>),
+     але після обдумування лекції, був зроблений висновок, що flex блоки будуть краще для читабельності коду -->
+    <div class="header">
+        <!-- логотип -->
+        <div class="logo">
+            <div class="title">U</div>
+            <div class="subtitle">unipictures</div>
+        </div>
+        <div class="options">
+            <div class="menu">
+                <!-- кнопки меню -->
+                <input class="button" id="menu_button1" type="button" value="Категорії">
+                <input class="button" id="menu_button2" type="button" value="Відгуки">
+                <input class="button" id="menu_button3" type="button" value="Оплата">
+                <input class="button" id="menu_button4" type="button" value="Акції">
+                <input class="button" id="menu_button5" type="button" value="FAQ">
+                <input class="menu_button" type="button">
+            </div>
+            <div class="features">
+                <div class="area">
+                    <!-- поле вводу -->
+                    <input class="search" type="search" placeholder="Пошук">
+                    <div class="icons">
+                        <!-- іконки меню(пошук, кошик, аккаунт) -->
+                        <input class="icon" id="icon1" type="button">
+                        <input class="icon" id="icon2" type="button">
+                        <input class="icon" id="icon3" type="button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- розділювач -->
+    <div class="header_border"></div>
+    <!-- наповнення сайту -->
+    <div class="content">
+        <!-- ієрархія фрагменту зацікавлення користувача -->
+        <div class="agitation">
+            <!-- текст на картинці -->
+            <div class="title">Вітаємо вас на</div>
+            <div class="subtitle">Unipictures</div>
+            <div class="text">
+                <div id="text1">Вам потрібна картинка на робочий стіл?</div>
+                <div id="text2">Чи може ви хочете зробити подарунок?</div>
+                <div id="text3">Або ви робите відеогру і вам потрібна картинка для фону?</div>
+            </div>
+        </div>
+        <!-- продовження під картикою -->
+        <div class="under_agitation">Тоді ми допоможемо вам підібрати саме ту картинку, яка вам потрібна</div>
+        <!-- ієрархія блоку переваг -->
+        <div class="advantages">
+            <div class="title">Наші переваги</div>
+            <div class="advantage">
+                <!-- іконка та текст. Був варіант зробити картинку тегом, але не було помітної різниці при виконанні, тому тег <img> викорисаний не був -->
+                <div class="advantage_icon" id="advantage_icon1"></div>
+                <div class = "advantage_text">Наявність безкоштовних картинок непоганої якості</div>
+            </div>
+            <div class="advantage">
+                <div class="advantage_icon" id="advantage_icon2"></div>
+                <div class = "advantage_text">Великий каталог картинок</div>
+            </div>
+            <div class="advantage">
+                <div class="advantage_icon" id="advantage_icon3"></div>
+                <div class = "advantage_text">Часті знижки та бонуси для зареєстрованих користувачів</div>
+            </div>
+            <div class="advantage">
+                <div class="advantage_icon" id="advantage_icon4"></div>
+                <div class = "advantage_text">Зручність замовлення та невисокі ціни</div>
+            </div>
+        </div>
+        <!-- ієрархія блоку з посиланнями на замовлення і каталог(на створення та перехід на сторінку "замовлення" не вистачило часу) -->
+        <div class="catalogue_and_orders">
+            <div class="catalogue_title">Каталог</div>
+            <div class="categories">
+                <div class="title1">
+                    <!-- в цих кнопках був використаний фон-зображення, прибраний текст(один з небагатьох знайдених способів реалізації image button)
+                     та функція переходу на іншу сторінку -->
+                    <input class="go_to_free" type="button" onclick="goToCatalogue()">
+                    <div class="text1">Безкоштовні</div>
+                </div>
+                <div class="title2">
+                    <input class="go_to_pay" type="button" onclick="goToCatalogue()">
+                    <div class="text2">Преміум</div>
+                </div>
+            </div>
+            <div class="order_title">Замовлення</div>
+            <div class="order_background">
+                <!-- в кнопці замовлення перехід відсутній через брак часу настворення сторінки -->
+                <input class="order_button" type="button" value="Оформити замовлення">
+            </div>
+        </div>
+        <!-- ієрархія блоку з популярнимим малюнками -->
+        <div class="popular_pictures">
+            <div class="title">Популярні малюнки</div>
+            <!-- була створеня багаторівнева ієрархія для адаптації під різні розміри екрану, але не знадобилась -->
+            <div class="pictures_list">
+                <!-- опис картини -->
+                <div class="picture" id="picture1">
+                    <!-- зображення -->
+                    <div class="preview"></div>
+                    <div class="picture_title">Дівчина в загадковому світі</div>
+                    <!-- інформація (оцінка та завантаження) -->
+                    <div class="stats">
+                        <div class="rate">
+                            <div class="number">4.6</div>
+                            <div class="icon"></div>
+                        </div>
+                        <div class="downloads">
+                            <div class="number">56</div>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    <!-- вартість та деталі -->
+                    <div class="details">
+                        <div class="cost">4.99$</div>
+                        <input class="details_button" type="button" value="Детальніше">
+                    </div>
+                </div>
+                <div class="picture" id="picture2">
+                    <div class="preview"></div>
+                    <div class="picture_title">Хлопець-перевертень</div>
+                    <div class="stats">
+                        <div class="rate">
+                            <div class="number">4.8</div>
+                            <div class="icon"></div>
+                        </div>
+                        <div class="downloads">
+                            <div class="number">31</div>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="cost">8.99$</div>
+                        <input class="details_button" type="button" value="Детальніше">
+                    </div>
+                </div>
+                <div class="picture" id="picture3">
+                    <div class="preview"></div>
+                    <div class="picture_title">Прибулець з космосу з огірками</div>
+                    <div class="stats">
+                        <div class="rate">
+                            <div class="number">4.5</div>
+                            <div class="icon"></div>
+                        </div>
+                        <div class="downloads">
+                            <div class="number">29</div>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="cost">free</div>
+                        <input class="details_button" type="button" value="Детальніше">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- другий розділювач -->
+    <div class="content_border"></div>
+    <!-- ієрархія футеру -->
+    <div class="footer">
+        <!-- контакти -->
+        <div class="contacts">
+            <div class="contact">Контакти</div>
+            <div class="contact">(065) 324-56-47</div>
+            <div class="contact">(037) 274-84-26</div>
+        </div>
+        <!-- була використана досить дивна ієрархія для адаптації елементів -->
+        <div class="info">
+            <!-- посилання -->
+            <a class="about_us" href="">Про нас</a>
+            <div class="details">
+                <a class="detail" href="">Умови використання</a>
+                <a class="detail" href="">Політика конфіденційності</a>
+            </div>
+        </div>
+        <div class="icons">
+            <!-- іконки-кнопки (телеграм, фейсбук, інстаграм -->
+            <input class="icon" id="footer_icon1" type="button">
+            <input class="icon" id="footer_icon2" type="button">
+            <input class="icon" id="footer_icon3" type="button">
+        </div>
+    </div>
+</body>
+</html>

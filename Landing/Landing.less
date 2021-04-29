@@ -1,0 +1,2078 @@
+//заміна стилю тексту в пустому полі введення на власний(колір, шрифт) для різних браузерів
+input::-webkit-input-placeholder {
+  color: #666666;
+  font-family: FiraSans-lightItalic, serif;
+}
+input::-moz-placeholder {
+  color: #666666;
+  font-family: FiraSans-lightItalic, serif;
+}
+
+//додвання шрифтів з відповідних файлів
+@font-face {
+  font-family: "DiplomataSC";
+  src: url("../Resources/Fonts/DiplomataSC/DiplomataSC-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Comfortaa-regular";
+  src: url("../Resources/Fonts/Comfortaa/Comfortaa-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Comfortaa-bold";
+  src: url("../Resources/Fonts/Comfortaa/Comfortaa-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSans-regular";
+  src: url("../Resources/Fonts/FiraSans/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSans-medium";
+  src: url("../Resources/Fonts/FiraSans/FiraSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSans-lightItalic";
+  src: url("../Resources/Fonts/FiraSans/FiraSans-LightItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BalsamiqSans-regular";
+  src: url("../Resources/Fonts/Balsamiq Sans/BalsamiqSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BalsamiqSans-bold";
+  src: url("../Resources/Fonts/Balsamiq Sans/BalsamiqSans-Bold.ttf") format("truetype");
+}
+
+//змінні кольорів, які мало де використовуються, через розуміння їх великої кількості
+@menu_first_color: #BBF3A1;
+@menu_second_color: #6F9DAA;
+
+//ширина екрану, для якої відбувається зміна елементів
+@extra_large: 1200px;
+@large: 992px;
+@medium: 768px;
+@small: 576px;
+
+//основні характеристики: ширина, висота по розмірам вікна,
+//відсутність можливості виділити текст, а також мінімальна
+// ширина - 432 пікселі
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-x: hidden;
+  min-width: 432px;
+}
+
+//загальні стилі хедеру - розміщення flex блоків в первому
+// направленні(column, row), а також вирівнювання відносно
+// цих направлень(justify-content, align-items). Логотип
+// створений зі звичайних елементів(на 100% скруглена границя,
+// градуєнтна заливка та 2 тексти). Для кнопок меню вибрана позиція,
+// що не залежить від інших елементів, для деяких - залежно від цього
+// елемента. На кнопках також прибрані рамки та контур при натисканні.
+//url() дозволяє поставити на фон картинку і отримати image button,
+//але для нормального відображення потрібно також задати розмір
+// (розтягнути на весь блок, або вмістити у блок).
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #262E44;
+  width: 100%;
+  .logo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#BBF3A1, #6F9DAA);
+    border-radius: 100%;
+    .title {
+      font-family: DiplomataSC, serif;
+      text-align: center;
+    }
+    .subtitle {
+      font-family: DiplomataSC, serif;
+      text-align: center;
+    }
+  }
+  .options {
+    position: relative;
+    flex-direction: row;
+    height: 100%;
+    .menu {
+      .button {
+        text-align: center;
+        font-family: Comfortaa, serif;
+        display: none;
+        background: linear-gradient(#BBF3A1, #6F9DAA);
+        border: none
+      }
+      .button:hover {
+        background: linear-gradient(lighten(#BBF3A1, 15%), lighten(#6F9DAA, 15%));
+      }
+      .button:focus {
+        outline: none;
+      }
+      .menu_button  {
+        position: absolute;
+        background: url("../Resources/Images/Icons/MenuIcon.png");
+        background-size: contain;
+        border: none;
+      }
+      .menu_button:focus  {
+        outline: none;
+      }
+    }
+    .features {
+      .area {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        background: #DDDDDD;
+        .search {
+          position: absolute;
+        }
+        .search:focus {
+          outline: none;
+        }
+        .icons {
+          .icon {
+            position: absolute;
+            border: none;
+          }
+          .icon:focus {
+            outline: none;
+          }
+          .icon:hover {
+          }
+          #icon1 {
+            background: url("../Resources/Images/Icons/SearchIcon.png");
+            background-size: contain;
+          }
+          #icon2 {
+            background: url("../Resources/Images/Icons/CartIcon.png");
+            background-size: contain;
+          }
+          #icon3 {
+            background: url("../Resources/Images/Icons/AccountIcon.png");
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+}
+//для розділювача потрібні тільки ширина на весь екран та фон
+.header_border {
+  width: 100%;
+  background: white;
+}
+.content {
+  //спроба одразу видалити контури при натисканні на кнопки
+  input:focus {
+    outline: none;
+  }
+  //про всяк випадок спочатку виставлялась ширина 100%, але
+  //потім це було перенесено в body. Для тексту був використаний
+  //градієнт, але для цього довелося зробити текст фоном
+  .agitation {
+    width: 100%;
+    background: url("../Resources/Images/Background/LandingAgitationBackground.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    .title {
+      text-align: center;
+      font-family: FiraSans-regular, serif;
+    }
+    .subtitle {
+      text-align: center;
+      font-family: DiplomataSC, serif;
+    }
+    .text {
+      font-family: Comfortaa-regular, serif;
+      text-align: center;
+      #text1 {
+        background: linear-gradient(180deg, #000000 80%, #00000000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      #text2 {
+        background: linear-gradient(180deg, #000000 80%, #00000000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      #text3 {
+        background: linear-gradient(180deg, #000000 95%, #00000000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+  //чорний текст на білому фоні
+  .under_agitation {
+    font-family: BalsamiqSans-regular, serif;
+    text-align: center;
+    background: #FFFFFF;
+  }
+  //фон - градієнт, всі картинки займають весь свй блок
+  .advantages {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#FFFFFF, #D0EE9C);
+    .title {
+      font-family: Comfortaa-bold, serif;
+      color: #3C4F5C;
+    }
+    .advantage {
+      display: flex;
+      .advantage_icon {
+        background: no-repeat;
+      }
+
+      #advantage_icon1 {
+        background: url("../Resources/Images/Icons/advantage1Icon.png");
+        background-size: cover;
+      }
+      #advantage_icon2 {
+        background: url("../Resources/Images/Icons/advantage2Icon.png");
+        background-size: cover;
+      }
+      #advantage_icon3 {
+        background: url("../Resources/Images/Icons/advantage3Icon.png");
+        background-size: cover;
+      }
+      #advantage_icon4 {
+        background: url("../Resources/Images/Icons/advantage4Icon.png");
+        background-size: cover;
+      }
+
+      .advantage_text {
+        font-family: BalsamiqSans-regular, serif;
+      }
+    }
+  }
+  //блок каталогу та замовлень складних стилів не мають, але з картинками
+  // на фоні постіно була проблема білої лінії, тому було прийнято рішення
+  // просто приьрати горизонтальну прокрутку
+  .catalogue_and_orders {
+    width: 100%;
+    background: linear-gradient(#D0EE9C, #FFFFFF);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .catalogue_title {
+      text-align: center;
+      font-family: Comfortaa-bold, serif;
+      color: #3C4F5C;
+    }
+    .categories {
+      display: flex;
+      .title1 {
+        display: flex;
+        flex-direction: column;
+        .go_to_free {
+          border: none;
+          background: url("../Resources/Images/GoToCatalogButtons/GoToFreeImage.png");
+          background-size: cover;
+        }
+        .go_to_free:focus {
+          outline: none;
+        }
+        .text1 {
+          text-align: center;
+          font-family: BalsamiqSans-regular, serif;
+          color: #FFFFFF;
+          background: #6F9DAA;
+        }
+      }
+
+      .title2 {
+        display: flex;
+        flex-direction: column;
+        .go_to_pay {
+          border: none;
+          background: url("../Resources/Images/GoToCatalogButtons/GoToPayImage.png") no-repeat;
+          background-size: cover;
+        }
+        .go_to_pay:focus {
+          outline: none;
+        }
+        .text2 {
+          text-align: center;
+          font-family: BalsamiqSans-regular, serif;
+          color: #FFFFFF;
+          background: #D23232;
+        }
+      }
+    }
+    .order_title {
+      text-align: center;
+      font-family: Comfortaa-bold, serif;
+      color: #3C4F5C;
+    }
+    .order_background {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("../Resources/Images/Background/MakeOrderBackground.png") center;
+      background-size: cover;
+      .order_button {
+        font-family: BalsamiqSans-regular, serif;
+
+        background: #DDDDDD;
+        color: #3C4F5C;
+      }
+      .order_button:focus {
+        outline: none;
+      }
+    }
+  }
+  .popular_pictures {
+    background: linear-gradient(#FFFFFF, #CEF09F);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      font-family: Comfortaa-bold, serif;
+      color: #3C4F5C;
+    }
+    .pictures_list {
+      display: flex;
+      .picture {
+        display: flex;
+        flex-direction: column;
+        background: #DDDDDD;
+        .preview {
+          background-position: center;
+        }
+        .picture_title {
+          width: 100%;
+          text-align: center;
+          font-family: FiraSans-regular, serif;
+        }
+        .stats {
+          display: flex;
+          flex-direction: row;
+            .rate {
+              display: flex;
+              flex-direction: row;
+
+              .number {
+                font-family: BalsamiqSans-regular, serif;
+              }
+
+              .icon {
+                background: url("../Resources/Images/Icons/StarIcon.png") no-repeat;
+                background-size: cover;
+              }
+            }
+
+            .downloads {
+              display: flex;
+              flex-direction: row;
+
+              .number {
+                font-family: BalsamiqSans-regular, serif;
+              }
+
+              .icon {
+                background: url("../Resources/Images/Icons/DownloadIcon.png") no-repeat;
+                background-size: cover;
+              }
+            }
+          }
+        .details {
+          display: flex;
+          flex-direction: row;
+          .cost {
+            font-family: FiraSans-regular, serif;
+          }
+          .details_button {
+            border: none;
+            background: #456D89;
+            font-family: FiraSans-regular, serif;
+            color: #FFFFFF;
+          }
+          .details_button:hover {
+            background: lighten(#456D89, 15%);
+          }
+          .details_button:focus {
+            outline: none;
+          }
+        }
+      }
+      #picture1 {
+        .preview {
+          background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+          background-size: cover;
+        }
+      }
+      #picture2 {
+        .preview {
+          background: url("../Resources/Images/Pictures/Picture2.png") no-repeat;
+          background-size: cover;
+        }
+      }
+      #picture3 {
+        .preview {
+          background: url("../Resources/Images/Pictures/Picture3.png") no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}
+.content_border {
+  width: 100%;
+  background: white;
+}
+//в загальних стилях футеру також немає нічого незвичного,
+// хіба що оформлення посилань
+.footer {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background: #262E44;
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    .contact {
+      font-family: FiraSans-regular, serif;
+      color: #EEEEEE
+    }
+  }
+  .info {
+    display: flex;
+    .about_us {
+      text-decoration: none;
+      font-family: FiraSans-regular, serif;
+      color: #EEEEEE
+    }
+    .about_us:hover {
+      text-decoration: underline;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      .detail {
+        text-decoration: none;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+      .detail:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .icons {
+    display: flex;
+    .icon {
+      border-radius: 100%;
+    }
+    .icon:focus {
+      outline: none;
+    }
+    #footer_icon1 {
+      background: url("../Resources/Images/Icons/TelegramIcon.png") no-repeat;
+      background-size: cover;
+    }
+    #footer_icon2 {
+      background: url("../Resources/Images/Icons/FacebookIcon.png") no-repeat;
+      background-size: cover;
+    }
+    #footer_icon3 {
+      background: url("../Resources/Images/Icons/InstagramIcon.png") no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+//432-575 пікселів
+@media (max-width: @small - 1px) {
+  //визначаються розміри та відступи в хедері(деякі в пікселях,
+  // але це мабуть не найкращий варіант)
+  .header {
+    height: 50px;
+    .logo {
+      margin-left: 1%;
+      width: 36px;
+      height: 36px;
+      .title {
+        font-size: 16px;
+      }
+      .subtitle {
+        font-size: 2.2px;
+      }
+    }
+    .options {
+      width: 85%;
+      //меню зміщено вправо
+      .menu {
+        float:right;
+        margin-right: 1%;
+        margin-top: 10px;
+        .button {
+        }
+        .menu_button  {
+          width: 30px;
+          height: 30px;
+        }
+        //була додана рамка при наведенні на кнопку
+        .menu_button:hover  {
+          border: 0.1px solid white;
+        }
+      }
+      .features {
+        .area {
+          border-radius: 20px;
+          width: 85%;
+          height: 20px;
+          margin-left: 20px;
+          margin-top: 13px;
+          padding: 3px;
+          .search {
+            height: 20px;
+            padding-left: 10px;
+            border-radius: 20px;
+            border: 1px solid black;
+            width: 75%;
+          }
+          .icons {
+            .icon {
+              height: 20px;
+              width: 20px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.1px solid black;
+            }
+            //для абсолютно розміщених блоків потрібні великі відступи,
+            // але можна було б і не робити їх абсолютними
+            #icon1 {
+              margin-left: 76%;
+            }
+            #icon2 {
+              margin-left: 84%;
+            }
+            #icon3 {
+              margin-left: 92%;
+            }
+          }
+        }
+      }
+    }
+  }
+  //для розділювачів потрібна ще висота
+  .header_border {
+    height: 1.5px;
+  }
+  .content {
+    .agitation {
+      padding-bottom: 5.4%;
+      .title {
+        height: 10%;
+        margin-top: 3%;
+        font-size: 10px;
+      }
+
+      .subtitle {
+        height: 10%;
+        margin-top: 8%;
+        font-size: 10px;
+      }
+
+      .text {
+        font-size: 10px;
+
+        #text1 {
+          width: 140px;
+          height: 10%;
+          margin-left: 12%;
+          margin-top: 20%;
+        }
+
+        #text2 {
+          width: 140px;
+          height: 10%;
+          margin-left: 30%;
+          margin-top: 12%;
+        }
+
+        #text3 {
+          display: none;
+        }
+      }
+    }
+    .under_agitation {
+      min-width: 432px;
+      height: 40px;
+      padding-top: 9px;
+      font-size: 9px;
+    }
+    .advantages {
+      height: 180px;
+      .title {
+        text-align: center;
+        font-size: 11px;
+        padding-bottom: 5px;
+      }
+      .advantage {
+        margin-left: 12%;
+        margin-top: 8px;
+        .advantage_icon {
+          width: 20px;
+          height: 20px;
+        }
+        //для вирівеювання тексту по вертикалі довелося змінювати висоту рядку
+        .advantage_text {
+          font-size: 8px;
+          line-height: 2.5;
+          padding-left: 2%;
+        }
+      }
+    }
+    .catalogue_and_orders {
+      height: 900px;
+      .catalogue_title {
+        font-size: 12px;
+      }
+      .categories {
+        flex-direction: column;
+        .title1 {
+          margin-top: 15px;
+          .go_to_free {
+            width: 300px;
+            height: 300px;
+          }
+          .text1 {
+            height: 24px;
+            line-height: 2;
+            font-size: 12px;
+          }
+        }
+
+        .title2 {
+          margin-top: 10px;
+          .go_to_pay {
+            height: 300px;
+            width: 300px;
+          }
+          .text2 {
+            height: 24px;
+            line-height: 2;
+            font-size: 12px;
+          }
+        }
+      }
+      .order_title {
+        margin-top: 20px;
+        font-size: 12px;
+      }
+      .order_background {
+        margin-top: 10px;
+        width: 76%;
+        height: 200px;
+        .order_button {
+          height: 30px;
+          width: 180px;
+          border: #7DB297 solid 1.5px;
+        }
+      }
+    }
+    //тут розміщені 2 малюнки (3 не відображується)
+    .popular_pictures {
+      padding-bottom: 30px;
+      .title {
+        margin-top: 50px;
+        font-size: 15px;
+      }
+      .pictures_list {
+        flex-direction: column;
+        //висоту можна було б і не фіксувати як у каталозі, але це дозволяє
+        // запобігти зїжджанню блоків при великій назві малюнку
+        .picture {
+          width: 300px;
+          height: 450px;
+          outline: 1px solid black;
+          .preview {
+            width: 300px;
+            height: 300px;
+          }
+          .picture_title {
+            margin-top: 10px;
+            font-size: 15px;
+            font-family: FiraSans-regular, serif;
+          }
+          .stats {
+            margin-top: 20px;
+            padding: 0 30px 0 30px;
+            width: 240px;
+            .rate {
+                .number {
+                  font-size: 20px;
+                  line-height: 1.5;
+                }
+                .icon  {
+                  margin-left: 5px;
+                  height: 30px;
+                  width: 30px;
+                }
+              }
+
+              .downloads {
+                margin-left: auto;
+                .number {
+                  font-size: 20px;
+                  line-height: 1.5;
+                  margin-right: 5px;
+                }
+
+                .icon {
+                  height: 30px;
+                  width: 30px;
+                }
+              }
+          }
+          .details {
+            display: flex;
+            flex-direction: row;
+            width: 240px;
+            margin-top: 20px;
+            padding: 0 30px 0 30px;
+            .cost {
+              font-size: 20px;
+              line-height: 2;
+            }
+            .details_button {
+              font-size: 20px;
+              height: 40px;
+              width: 150px;
+              margin-left: auto;
+            }
+          }
+        }
+        #picture1 {
+          margin-top: 15px;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture2 {
+          margin-top: 20px;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture2.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture3 {
+          display: none;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 1.5px;
+  }
+  //для футеру розміри та відступи також в змішаних одиницях
+  .footer {
+    padding: 10px 0 30px 0;
+    font-size: 2vw;
+    .contacts {
+      .contact {
+        margin-top: 10px;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+    }
+    .info {
+      margin-left: 16%;
+      flex-direction: column;
+      .about_us {
+        margin-top: 10px;
+      }
+
+      .details {
+        .detail {
+          margin-top: 10px;
+        }
+      }
+    }
+    .icons {
+      margin-left: 16%;
+      flex-direction: column;
+      .icon {
+        height: 4vw;
+        width: 4vw;
+        border: 1px solid white;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+//576-767 пікселів
+@media (min-width: @small) {
+  //великих змін у хедері немає, змінені деякі відсутпи та всі розміри
+  .header {
+    min-width: 576px;
+    height: 60px;
+    .logo {
+      margin-left: 1%;
+      width: 45px;
+      height: 45px;
+      .title {
+        font-size: 20px;
+      }
+      .subtitle {
+        font-size: 3px;
+      }
+    }
+    .options {
+      height: 100%;
+      width: 85%;
+      .menu {
+        margin-right: 1%;
+        float:right;
+        .button {
+        }
+        .menu_button  {
+          margin-top: 10px;
+          width: 40px;
+          height: 40px;
+        }
+        .menu_button:hover  {
+          border: 0.2px solid white;
+        }
+      }
+      .features {
+        .area {
+          border-radius: 20px;
+          width: 85%;
+          height: 24px;
+          margin-left: 22px;
+          margin-top: 14.5px;
+          padding: 4px;
+          .search {
+            height: 24px;
+            padding-left: 10px;
+            border-radius: 20px;
+            border: 1.2px solid black;
+            width: 75%;
+          }
+          .search:focus {
+          }
+          .icons {
+            .icon {
+              height: 24px;
+              width: 24px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.2px solid black;
+            }
+            #icon1 {
+              margin-left: 77.5%;
+            }
+            #icon2 {
+              margin-left: 85%;
+            }
+            #icon3 {
+              margin-left: 92.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  //розділювачі розширюються
+  .header_border {
+    height: 2px;
+  }
+  .content {
+    min-width: 576px;
+    //на початку сторінки змінюються полодення текстів, щоб відповідати фону
+    .agitation {
+      width: 100%;
+      padding-bottom: 6.6%;
+      .title {
+        height: 10%;
+        margin-top: 3%;
+        font-size: 12px;
+      }
+
+      .subtitle {
+        height: 10%;
+        margin-top: 8%;
+        font-size: 12px;
+      }
+
+      .text {
+        font-size: 12px;
+
+        #text1 {
+          width: 170px;
+          margin-left: 12%;
+          margin-top: 20%;
+        }
+
+        #text2 {
+          width: 170px;
+          margin-left: 30%;
+          margin-top: 12%;
+        }
+
+        #text3 {
+          display: none;
+        }
+      }
+    }
+    .under_agitation {
+      min-width: 576px;
+      height: 55px;
+      padding-top: 11px;
+      font-size: 11px;
+    }
+    .advantages {
+      height: 225px;
+      .title {
+        text-align: center;
+        font-size: 14px;
+        padding-bottom: 7px;
+      }
+      .advantage {
+        margin-left: 12%;
+        margin-top: 8px;
+        .advantage_icon {
+          width: 25px;
+          height: 25px;
+        }
+
+        .advantage_text {
+          font-size: 10px;
+          line-height: 2.5;
+          padding-left: 2%;
+        }
+      }
+    }
+    //спочатку замість додаткових відступів використовувалась фіксована висота блоку
+    .catalogue_and_orders {
+      height: 1150px;
+      .catalogue_title {
+        font-size: 15px;
+      }
+      .categories {
+        flex-direction: column;
+
+        .title1 {
+          margin-top: 20px;
+          .go_to_free {
+            width: 350px;
+            height: 350px;
+          }
+          .text1 {
+            height: 30px;
+            line-height: 2;
+            font-size: 15px;
+          }
+        }
+
+        .title2 {
+          margin-top: 15px;
+          .go_to_pay {
+            height: 350px;
+            width: 350px;
+          }
+          .text2 {
+            height: 30px;
+            line-height: 2;
+            font-size: 15px;
+          }
+        }
+      }
+      .order_title {
+        margin-top: 30px;
+        font-size: 15px;
+      }
+      .order_background {
+        margin-top: 15px;
+        width: 76%;
+        height: 270px;
+        .order_button {
+          font-size: 15px;
+          height: 40px;
+          width: 240px;
+          border: #7DB297 solid 1.5px;
+        }
+      }
+    }
+    //деякі блоки ростуть не пропорційно росту ширини екрану
+    .popular_pictures {
+      padding-bottom: 40px;
+      .title {
+        margin-top: 60px;
+        font-size: 19px;
+      }
+      .pictures_list {
+        flex-direction: column;
+        .picture {
+          width: 350px;
+          height: 525px;
+          outline: 1.5px solid black;
+          .preview {
+            width: 350px;
+            height: 350px;
+          }
+          .picture_title {
+            margin-top: 15px;
+            font-size: 19px;
+            font-family: FiraSans-regular, serif;
+          }
+          .stats {
+            margin-top: 20px;
+            padding: 0 35px 0 35px;
+            width: 280px;
+            .rate {
+              .number {
+                font-size: 24px;
+                line-height: 1.5;
+              }
+              .icon  {
+                margin-left: 7px;
+                height: 36px;
+                width: 36px;
+              }
+            }
+
+            .downloads {
+              margin-left: auto;
+              .number {
+                font-size: 24px;
+                line-height: 1.5;
+                margin-right: 7px;
+              }
+
+              .icon {
+                height: 36px;
+                width: 36px;
+              }
+            }
+          }
+          .details {
+            display: flex;
+            flex-direction: row;
+            width: 280px;
+            margin-top: 20px;
+            padding: 0 35px 0 35px;
+            .cost {
+              font-size: 24px;
+              line-height: 2;
+            }
+            .details_button {
+              font-size: 24px;
+              height: 48px;
+              width: 180px;
+              margin-left: auto;
+            }
+          }
+        }
+        #picture1 {
+          margin-top: 20px;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture2 {
+          margin-top: 25px;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture2.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture3 {
+          display: none;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 2px;
+  }
+  .footer {
+    padding: 12px 0 35px 0;
+    font-size: 2vw;
+    .contacts {
+      .contact {
+        margin-top: 10px;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+    }
+    .info {
+      margin-left: 10%;
+      flex-direction: column;
+      .about_us {
+        margin-top: 10px;
+      }
+
+      .details {
+        .detail {
+          margin-top: 10px;
+        }
+      }
+    }
+    .icons {
+      margin-left: 10%;
+      flex-direction: row;
+      .icon {
+        height: 4vw;
+        width: 4vw;
+        border: 1px solid white;
+        margin-top: 5px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+//768-991 пікселів
+@media (min-width: @medium) {
+  //в хедері кнопка меню замінюється на 5 кнопок. Інші компоненти стають більшими
+  .header {
+    min-width: 768px;
+    height: 90px;
+    .logo {
+      margin-left: 3%;
+      width: 60px;
+      height: 60px;
+      .title {
+        font-size: 28px;
+      }
+      .subtitle {
+        font-size: 3.5px;
+      }
+    }
+    .options {
+      flex-direction: column;
+      height: 100%;
+      width: 85%;
+      .menu {
+        margin-top: 5px;
+        float: left;
+        margin-right: 0;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: 85%;
+        height: 40px;
+        margin-left: 4%;
+        .button {
+          position: absolute;
+          display: inline-block;
+          font-size: 16px;
+          height: 40px;
+          width: 19.75%;
+        }
+        //для абсолютно розміщених кнопок потрібно ставити великі відступи
+        #menu_button1 {
+          margin-left: 0;
+        }
+        #menu_button2 {
+          margin-left: 20.25%;
+        }
+        #menu_button3 {
+          margin-left: 40.5%;
+        }
+        #menu_button4 {
+          margin-left: 60.75%;
+        }
+        #menu_button5 {
+          margin-left: 81%;
+        }
+        .menu_button  {
+          display: none;
+        }
+        .menu_button:hover  {
+          border: 0.2px solid white;
+        }
+      }
+      .features {
+        .area {
+          border-radius: 20px;
+          width: 85%;
+          height: 24px;
+          margin-left: 4%;
+          margin-top: 50px;
+          padding: 4px;
+          .search {
+            font-size: 16px;
+            height: 24px;
+            padding-left: 10px;
+            border-radius: 20px;
+            border: 1.5px solid black;
+            width: 75%;
+          }
+          .search:focus {
+          }
+          .icons {
+            .icon {
+              height: 24px;
+              width: 24px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.2px solid black;
+            }
+            #icon1 {
+              margin-left: 77.5%;
+            }
+            #icon2 {
+              margin-left: 85%;
+            }
+            #icon3 {
+              margin-left: 92.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header_border {
+    height: 3px;
+  }
+  .content {
+    //додається 3-й текст
+    .agitation {
+      width: 100%;
+      .title {
+        margin-top: 3%;
+        font-size: 15px;
+      }
+
+      .subtitle {
+        margin-top: 8%;
+        font-size: 15px;
+      }
+
+      .text {
+        font-size: 12px;
+
+        #text1 {
+          width: 170px;
+          margin-left: 28%;
+          margin-top: 6%;
+        }
+
+        #text2 {
+          width: 170px;
+          margin-left: 15%;
+          margin-top: 10%;
+        }
+
+        #text3 {
+          display: flex;
+          width: 170px;
+          height: 10%;
+          margin-left: 32%;
+          margin-top: 13%;
+        }
+      }
+    }
+    .under_agitation {
+      height: 65px;
+      padding-top: 13px;
+      font-size: 13px;
+    }
+    .advantages {
+      height: 270px;
+      .title {
+        text-align: center;
+        font-size: 16px;
+        padding-bottom: 10px;
+      }
+      .advantage {
+        margin-left: 12%;
+        margin-top: 10px;
+        .advantage_icon {
+          width: 30px;
+          height: 30px;
+        }
+
+        .advantage_text {
+          font-size: 12px;
+          line-height: 2.5;
+          padding-left: 2%;
+        }
+      }
+    }
+    //змінюється порядок розміщення кнопок з вертикального на горизонтальний
+    .catalogue_and_orders {
+      height: 88vw;
+      .catalogue_title {
+        font-size: 20px;
+      }
+      .categories {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 45%;
+        .title1 {
+          margin-top: 1.5%;
+          width: 36%;
+          height: 100%;
+          .go_to_free {
+            width: 100%;
+          }
+          .text1 {
+            height: 15%;
+            line-height: 2;
+            font-size: 150%;
+          }
+        }
+
+        .title2 {
+          width: 36%;
+          height: 100%;
+          margin-top: 1.5%;
+          margin-left: 4%;
+          .go_to_pay {
+            width: 100%;
+          }
+          .text2 {
+            height: 15%;
+            line-height: 2;
+            font-size: 150%;
+          }
+        }
+      }
+      .order_title {
+        margin-top: 4%;
+        font-size: 20px;
+      }
+      .order_background {
+        margin-top: 1.5%;
+        width: 76%;
+        height: 45%;
+        .order_button {
+          font-size: 20px;
+          height: 50px;
+          width: 300px;
+          border: #7DB297 solid 2.5px;
+        }
+      }
+    }
+    .popular_pictures {
+      width: 100%;
+      padding-bottom: 5%;
+      .title {
+        margin-top: 6%;
+        font-size: 24px;
+      }
+      .pictures_list {
+        width: 76%;
+        margin-top: 2%;
+        flex-direction: row;
+        .picture {
+          width: 48%;
+          height: 52vw;
+          outline: 1px solid black;
+          .preview {
+            width: 100%;
+            height: 36.475vw;
+          }
+          .picture_title {
+            margin-top: 4%;
+            font-size: 2vw;
+            font-family: FiraSans-regular, serif;
+          }
+          .stats {
+            margin-top: 4%;
+            padding: 0 15% 0 15%;
+            width: 70%;
+            .rate {
+              .number {
+                font-size: 2vw;
+                line-height: 1.5;
+              }
+              .icon  {
+                margin-left: 7px;
+                height: 3vw;
+                width: 3vw;
+              }
+            }
+
+            .downloads {
+              margin-left: auto;
+              .number {
+                font-size: 2vw;
+                line-height: 1.5;
+                margin-right: 7px;
+              }
+
+              .icon {
+                height: 3vw;
+                width: 3vw;
+              }
+            }
+          }
+          .details {
+            display: flex;
+            flex-direction: row;
+            width: 70%;
+            margin-top: 4%;
+            padding: 0 15% 0 15%;
+            .cost {
+              font-size: 2vw;
+              line-height: 2;
+            }
+            .details_button {
+              font-size: 2vw;
+              height: 4vw;
+              width: 16vw;
+              margin-left: auto;
+            }
+          }
+        }
+        #picture1 {
+          margin-top: 0;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture2 {
+          margin-top: 0;
+          margin-left: 4%;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture2.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        //третій малюнок все ще прихований
+        #picture3 {
+          display: none;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 3px;
+  }
+  //футер майже не змінюється
+  .footer {
+    padding: 15px 0 42px 0;
+  }
+}
+
+//992-1199 пікселів
+@media (min-width: @large) {
+  .header {
+    min-width: 992px;
+    height: 100px;
+    //логотип зміщується в крайню ліву частину хедеру
+    .logo {
+      float: left;
+      margin-right: 3%;
+      width: 70px;
+      height: 70px;
+      .title {
+        font-size: 30px;
+      }
+      .subtitle {
+        font-size: 4px;
+      }
+    }
+    .options {
+      .menu {
+        margin-left: 2%;
+        margin-top:10px;
+        .button {
+          position: absolute;
+          display: inline-block;
+          width: 19%;
+          height: 36px;
+          font-size: 22px;
+        }
+        #menu_button1 {
+          margin-left: 0;
+        }
+        #menu_button2 {
+          margin-left: 19.5%;
+        }
+        #menu_button3 {
+          margin-left: 39%;
+        }
+        #menu_button4 {
+          margin-left: 58.5%;
+        }
+        #menu_button5 {
+          margin-left: 78%;
+        }
+      }
+      .features {
+        .area {
+          width: 82%;
+          margin-left: 2%;
+          margin-top: 58px;
+          height: 28px;
+          .search {
+            height: 28px;
+            padding-left: 2%;
+            border-radius: 20px;
+            border: 1.7px solid black;
+            width: 78%;
+            font-size: 20px;
+          }
+          .icons {
+            .icon {
+              height: 28px;
+              width: 28px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.25px solid black;
+            }
+            #icon1 {
+              margin-left: 80%;
+            }
+            #icon2 {
+              margin-left: 86.5%;
+            }
+            #icon3 {
+              margin-left: 93%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header_border {
+    height: 4px;
+  }
+  //в наповненні сторінки крім розмірів нічого не змінилось
+  .content {
+    min-width: 992px;
+
+    .agitation {
+      width: 100%;
+
+      .title {
+        font-size: 20px;
+      }
+
+      .subtitle {
+        font-size: 20px;
+      }
+
+      .text {
+        font-size: 14px;
+
+        #text1 {
+          width: 200px;
+          margin-left: 28%;
+          margin-top: 6%;
+        }
+
+        #text2 {
+          width: 200px;
+          margin-left: 15%;
+          margin-top: 9%;
+        }
+
+        #text3 {
+          display: flex;
+          width: 200px;
+          height: 10%;
+          margin-left: 32%;
+          margin-top: 13%;
+        }
+      }
+    }
+    .under_agitation {
+      min-width: 992px;
+      height: 85px;
+      padding-top: 17px;
+      font-size: 17px;
+    }
+    .advantages {
+      height: 320px;
+      .title {
+        text-align: center;
+        font-size: 20px;
+        padding-bottom: 13px;
+      }
+      .advantage {
+        margin-left: 12%;
+        margin-top: 14px;
+        .advantage_icon {
+          width: 37.5px;
+          height: 37.5px;
+        }
+
+        .advantage_text {
+          font-size: 15px;
+          line-height: 2.5;
+          padding-left: 2%;
+        }
+      }
+    }
+    .catalogue_and_orders {
+      height: 85vw;
+      .catalogue_title {
+        font-size: 26px;
+      }
+      .categories {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 40%;
+        .title1 {
+          margin-top: 1.5%;
+          width: 36%;
+          height: 100%;
+          .go_to_free {
+            width: 100%;
+            height: 85%;
+          }
+          .text1 {
+            height: 15%;
+            line-height: 2;
+            font-size: 175%;
+          }
+        }
+
+        .title2 {
+          width: 36%;
+          height: 100%;
+          margin-top: 1.5%;
+          margin-left: 4%;
+          .go_to_pay {
+            width: 100%;
+            height: 85%;
+          }
+          .text2 {
+            height: 15%;
+            line-height: 2;
+            font-size: 175%;
+          }
+        }
+      }
+      .order_title {
+        margin-top: 4%;
+        font-size: 26px;
+      }
+      .order_background {
+        margin-top: 1.5%;
+        width: 76%;
+        height: 45%;
+        .order_button {
+          font-size: 26px;
+          height: 60px;
+          width: 360px;
+          border: #7DB297 solid 3px;
+        }
+      }
+    }
+    .popular_pictures {
+      width: 100%;
+      padding-bottom: 5%;
+      .title {
+        margin-top: 6%;
+        font-size: 28px;
+      }
+      .pictures_list {
+        .picture {
+          width: 32%;
+          height: 37vw;
+          outline: 1.5px solid black;
+          .preview {
+            width: 100%;
+            height: 24.6vw;
+          }
+          .picture_title {
+            margin-top: 4%;
+            font-size: 1.5vw;
+            font-family: FiraSans-regular, serif;
+          }
+          .stats {
+            margin-top: 6%;
+            padding: 0 15% 0 15%;
+            width: 70%;
+            .rate {
+              .number {
+                font-size: 1.5vw;
+                line-height: 1.5;
+              }
+              .icon  {
+                margin-left: 7px;
+                height: 2.25vw;
+                width: 2.25vw;
+              }
+            }
+
+            .downloads {
+              margin-left: auto;
+              .number {
+                font-size: 1.5vw;
+                line-height: 1.5;
+                margin-right: 7px;
+              }
+
+              .icon {
+                height: 2.25vw;
+                width: 2.25vw;
+              }
+            }
+          }
+          .details {
+            display: flex;
+            flex-direction: row;
+            width: 70%;
+            margin-top: 6%;
+            padding: 0 15% 0 15%;
+            .cost {
+              font-size: 1.5vw;
+              line-height: 2;
+            }
+            .details_button {
+              font-size: 1.5vw;
+              height: 3vw;
+              width: 12vw;
+              margin-left: auto;
+            }
+          }
+        }
+        #picture1 {
+          margin-top: 0;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture1.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture2 {
+          margin-top: 0;
+          margin-left: 2%;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture2.png") no-repeat;
+            background-size: cover;
+          }
+        }
+        #picture3 {
+          display: flex;
+          margin-top: 0;
+          margin-left: 2%;
+          .preview {
+            background: url("../Resources/Images/Pictures/Picture3.png") no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 4px;
+  }
+  .footer {
+    padding: 19px 0 52px 0;
+    font-size: 1.5vw;
+    .contacts {
+      .contact {
+        margin-top: 10px;
+        font-family: FiraSans-regular, serif;
+        color: #EEEEEE
+      }
+    }
+    .info {
+      width: 35%;
+      margin-left: 9%;
+      flex-direction: row;
+      .about_us {
+        margin-top: 10px;
+      }
+
+      .details {
+        margin-left: auto;
+        .detail {
+          margin-top: 10px;
+        }
+      }
+    }
+    .icons {
+      margin-left: 9%;
+      flex-direction: row;
+      .icon {
+        height: 3vw;
+        width: 3vw;
+        border: 1px solid white;
+        margin-top: 5px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+//1200+ пікселів
+@media (min-width: @extra_large) {
+  //хедер збільшується ще більше, але не буде нормально відображуватись
+  //при великій роздільній здатності
+  .header {
+    height: 125px;
+    .logo {
+      margin-left: 1%;
+      margin-right: 3%;
+      width: 85px;
+      height: 85px;
+      .title {
+        font-size: 36px;
+      }
+      .subtitle {
+        font-size: 5px;
+      }
+    }
+    .options {
+      .menu {
+        margin-left: 4%;
+        margin-top:14px;
+        .button {
+          position: absolute;
+          display: inline-block;
+          width: 19%;
+          height: 48px;
+          font-size: 25px;
+        }
+        #menu_button1 {
+          margin-left: 0;
+        }
+        #menu_button2 {
+          margin-left: 19.5%;
+        }
+        #menu_button3 {
+          margin-left: 39%;
+        }
+        #menu_button4 {
+          margin-left: 58.5%;
+        }
+        #menu_button5 {
+          margin-left: 78%;
+        }
+        .button:hover {
+          background: linear-gradient(lighten(#BBF3A1, 15%), lighten(#6F9DAA, 15%));
+        }
+        .menu_button  {
+          display: none;
+        }
+      }
+      .features {
+        width: 100%;
+        .area {
+          width: 82%;
+          margin-left: 4%;
+          margin-top: 70px;
+          height: 40px;
+          .search {
+            height: 40px;
+            padding-left: 2%;
+            border-radius: 20px;
+            border: 2px solid black;
+            width: 78%;
+            font-size: 24px;
+          }
+          .icons {
+            .icon {
+              height: 40px;
+              width: 40px;
+            }
+            .icon:focus {
+            }
+            .icon:hover {
+              border: 0.2px solid black;
+            }
+            #icon1 {
+              margin-left: 80%;
+            }
+            #icon2 {
+              margin-left: 86%;
+            }
+            #icon3 {
+              margin-left: 92%;
+            }
+          }
+        }
+      }
+    }
+  }
+  //максимальний розмір розділювача
+  .header_border {
+    height: 5px;
+  }
+  //порядок розміщення елементів не змінюється(більше
+  // 3-х картинок для прикладу було вирішено не робити)
+  .content {
+    min-width: 1200px;
+
+    .agitation {
+      width: 100%;
+
+      .title {
+        font-size: 23px;
+      }
+
+      .subtitle {
+        font-size: 23px;
+      }
+
+      .text {
+        font-size: 17px;
+
+        #text1 {
+          width: 230px;
+          margin-left: 28%;
+          margin-top: 6%;
+        }
+
+        #text2 {
+          width: 230px;
+          margin-left: 15%;
+          margin-top: 10%;
+        }
+
+        #text3 {
+          display: flex;
+          width: 230px;
+          height: 10%;
+          margin-left: 32%;
+          margin-top: 13%;
+        }
+      }
+    }
+    .under_agitation {
+      min-width: 1200px;
+      height: 100px;
+      padding-top: 20px;
+      font-size: 20px;
+    }
+    .advantages {
+      min-width: 1200px;
+      height: 400px;
+      .title {
+        text-align: center;
+        font-size: 25px;
+        padding-bottom: 17px;
+      }
+      .advantage {
+        margin-left: 12%;
+        margin-top: 17px;
+        .advantage_icon {
+          width: 45px;
+          height: 45px;
+        }
+
+        .advantage_text {
+          font-size: 18px;
+          line-height: 2.5;
+          padding-left: 2%;
+        }
+      }
+    }
+    .catalogue_and_orders {
+      height: 85vw;
+      .catalogue_title {
+        font-size: 32px;
+      }
+      .categories {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 40%;
+        .title1 {
+          margin-top: 1.5%;
+          width: 36%;
+          height: 100%;
+          .go_to_free {
+            width: 100%;
+            height: 85%;
+          }
+          .text1 {
+            height: 15%;
+            line-height: 2;
+            font-size: 200%;
+          }
+        }
+
+        .title2 {
+          width: 36%;
+          height: 100%;
+          margin-top: 1.5%;
+          margin-left: 4%;
+          .go_to_pay {
+            width: 100%;
+            height: 85%;
+          }
+          .text2 {
+            height: 15%;
+            line-height: 2;
+            font-size: 200%;
+          }
+        }
+      }
+      .order_title {
+        margin-top: 4%;
+        font-size: 32px;
+      }
+      .order_background {
+        margin-top: 1.5%;
+        width: 76%;
+        height: 45%;
+        .order_button {
+          font-size: 32px;
+          height: 75px;
+          width: 450px;
+          border: #7DB297 solid 4px;
+        }
+      }
+    }
+    .popular_pictures {
+      .title {
+        font-size: 34px;
+      }
+      .pictures_list {
+        .picture {
+          outline: 2px solid black;
+        }
+      }
+    }
+  }
+  .content_border {
+    height: 5px;
+  }
+  //футер той самий
+  .footer {
+    padding: 24px 0 70px 0;
+  }
+}

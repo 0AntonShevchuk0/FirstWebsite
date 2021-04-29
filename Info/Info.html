@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<!-- те саме, що і в лендінгу, але посилання на інші файли -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Дівчина в загадковому світі</title>
+    <link rel = "stylesheet" href = "Info.css">
+    <script src="info.js"></script>
+</head>
+<body>
+    <!-- хедер той самий(там є помилки, але виправляти доведеться всюди) -->
+    <div class="header">
+        <div class="logo">
+            <div class="title">U</div>
+            <div class="subtitle">unipictures</div>
+        </div>
+        <div class="options">
+            <div class="menu">
+                <input class="button" id="menu_button1" type="button" value="Категорії">
+                <input class="button" id="menu_button2" type="button" value="Відгуки">
+                <input class="button" id="menu_button3" type="button" value="Оплата">
+                <input class="button" id="menu_button4" type="button" value="Акції">
+                <input class="button" id="menu_button5" type="button" value="FAQ">
+                <input class="menu_button" type="button">
+            </div>
+            <div class="features">
+                <div class="area">
+                    <input class="search" type="search" placeholder="Пошук">
+                    <div class="icons">
+                        <input class="icon" id="icon1" type="button">
+                        <input class="icon" id="icon2" type="button">
+                        <input class="icon" id="icon3" type="button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header_border"></div>
+    <!-- до навігації по сторінці додається нова кнопка -->
+    <div class="navigation">
+        <input class="navigate_button" onclick="goToLanding()" type="button" value="Головна >">
+        <input class="navigate_button" onclick="goToCatalogue()" type="button" value="Каталог >">
+        <input class="navigate_button" type="button" value="Картина">
+    </div>
+    <div class="content">
+        <!-- назва малюнка -->
+        <div class="title">Дівчина в загадковому світі</div>
+        <!-- саме зображення -->
+        <div class="preview"></div>
+        <!-- опис малюнка -->
+        <div class="description">
+            <div class="description_title">Історія картини</div>
+            <div class="description_text">В фентезійному світі, де не було людей,
+                зявляється дівчина, яку одразу вражає ця дивовижна атмосфера спокою
+                та недоторканості і вона починає зливатися з цим світом</div>
+        </div>
+        <!-- оцінка малюнка(задумано, що є 5 зірок, але не всі вони будуть відображуватись і є дробні варіації іконки зірки) -->
+        <div class="rate">
+            <div class="rate_title">Оцінка</div>
+            <div class="rate_display">
+                <div class="rate_value">4.6</div>
+                <div class="rate_stars">
+                    <div class="rate_star" id="rate_star1"></div>
+                    <div class="rate_star" id="rate_star2"></div>
+                    <div class="rate_star" id="rate_star3"></div>
+                    <div class="rate_star" id="rate_star4"></div>
+                    <div class="rate_star" id="rate_star5"></div>
+                </div>
+            </div>
+        </div>
+        <!-- посилання на відгуки -->
+        <a class="reviews" href="">Переглянути відгуки (21)</a>
+        <!-- кнопки дій з малюнком(додати до обраного, написати відгук, до кошику) -->
+        <div class="actions">
+            <input class="action_button first" id="add_to_favorites" type="button" value="Додати до обраного">
+            <input class="action_button" type="button" id="write_review" value="Написати відгук">
+            <input class="action_button" type="button" id="add_to_cart" value="До кошику">
+        </div>
+    </div>
+    <div class="content_border"></div>
+    <!-- футер той самий, що і на сторінці лендінгу -->
+    <div class="footer">
+        <div class="contacts">
+            <div class="contact">Контакти</div>
+            <div class="contact">(065) 324-56-47</div>
+            <div class="contact">(037) 274-84-26</div>
+        </div>
+        <div class="info">
+            <a class="about_us" href="">Про нас</a>
+            <div class="details">
+                <a class="detail" href="">Умови використання</a>
+                <a class="detail" href="">Політика конфіденційності</a>
+            </div>
+        </div>
+        <div class="icons">
+            <input class="icon" id="footer_icon1" type="button">
+            <input class="icon" id="footer_icon2" type="button">
+            <input class="icon" id="footer_icon3" type="button">
+        </div>
+    </div>
+</body>
+</html>
